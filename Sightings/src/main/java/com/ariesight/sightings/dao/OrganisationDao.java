@@ -4,7 +4,7 @@ import com.ariesight.sightings.dto.Characters.SCharacter;
 import com.ariesight.sightings.dto.Organisations.Organisation;
 import java.util.List;
 
-public interface OrganisationDao {
+public interface OrganisationDAO {
     Organisation getOrganisationById(int id);
     List<Organisation> getAllOrganisations();
     Organisation addOrganisation(Organisation organisation);
@@ -12,4 +12,5 @@ public interface OrganisationDao {
     void deleteOrganisationById(int id);
     
     List<SCharacter> getOrganisationMembers(Organisation organisation);
+    List<Organisation> getOrganisationsOf(SCharacter character);
 }
