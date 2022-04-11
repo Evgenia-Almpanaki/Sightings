@@ -1,4 +1,4 @@
-package com.mycompany.sightings.dto;
+package com.ariesight.sightings.dto;
 
 public class Location {
     private String name;

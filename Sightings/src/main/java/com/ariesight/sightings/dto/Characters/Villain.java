@@ -1,4 +1,4 @@
-package com.mycompany.sightings.dto.Characters;
+package com.ariesight.sightings.dto.Characters;
 
 public class Villain extends SCharacter{
     
