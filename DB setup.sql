@@ -35,7 +35,7 @@ name varchar(50),
 
 CREATE TABLE Sightings(
 characterID int, 
-CONSTRAINT fk_Character FOREIGN KEY (characterID) REFERENCES Characters(id),
 LocationID int, 
+CONSTRAINT fk_CharacterS FOREIGN KEY (characterID) REFERENCES Characters(id),
 CONSTRAINT fk_Location FOREIGN KEY (LocationID) REFERENCES Locations(id)
 );
