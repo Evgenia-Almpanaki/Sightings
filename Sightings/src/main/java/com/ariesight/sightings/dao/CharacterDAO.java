@@ -10,5 +10,4 @@ public interface CharacterDAO {
     void updateCharacter(SCharacter character);
     void deleteCharacterById(int id);
     
-    List<SCharacter> getOrganisationsOf(SCharacter character);
 }
