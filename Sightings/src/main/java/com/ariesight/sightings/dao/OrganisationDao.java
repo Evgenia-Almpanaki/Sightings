@@ -1,6 +1,5 @@
 package com.ariesight.sightings.dao;
 
-import com.ariesight.sightings.dto.SCharacter;
 import com.ariesight.sightings.dto.Organisation;
 import java.util.List;
 
