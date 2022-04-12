@@ -11,7 +11,7 @@ public interface LocationDAO {
     void updateLocation(Location location);
     void deleteLocationById(int id);
     
-    List<Location> getLocationsByCharacter(String name);
+    //List<Location> getLocationsByCharacter(String name);
     
     
 }

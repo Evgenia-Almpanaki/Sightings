@@ -26,7 +26,7 @@ CREATE TABLE Affiliations (
         REFERENCES Organisations (id)
 );
 CREATE TABLE Locations (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     description MEDIUMTEXT,
     address VARCHAR(30),
