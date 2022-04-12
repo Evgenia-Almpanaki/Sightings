@@ -6,14 +6,24 @@ import java.util.List;
 
 public class SCharacter {
 
-    private int id;
+    public enum CharacterType {HERO, VILLAIN};
+    private int id; 
     private String name;
     private String description;
     private String superpower;
+    private CharacterType type;
     private List<Organisation> affiliations = new ArrayList<>();
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public CharacterType getType() {
+        return type;
+    }
+
+    public void setType(CharacterType type) {
+        this.type = type;
     }
 
     public int getId() {

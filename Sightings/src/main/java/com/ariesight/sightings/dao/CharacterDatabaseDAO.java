@@ -1,8 +1,6 @@
 package com.ariesight.sightings.dao;
 
-import com.ariesight.sightings.dto.Characters.Hero;
 import com.ariesight.sightings.dto.Characters.SCharacter;
-import com.ariesight.sightings.dto.Characters.Villain;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,20 +36,12 @@ public class CharacterDatabaseDAO implements CharacterDAO {
     @Override
     @Transactional
     public SCharacter addCharacter(SCharacter character) {
-        String classProperty = "";
-        if (character.getClass() == Hero.class) {
-            classProperty = "isHero";
-        } else {
-            classProperty = "isVillain";
-        }
 
-        final String INSERT_CHARACTER = "INSERT INTO Characters(name, description, superpower, ?) VALUES(?,?,?,?)";
+        final String INSERT_CHARACTER = "INSERT INTO Characters(name, description, superpower) VALUES(?,?,?)";
         jdbc.update(INSERT_CHARACTER,
-                classProperty,
                 character.getName(),
                 character.getDescription(),
-                character.getSuperpower(),
-                true);
+                character.getSuperpower());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         character.setId(newId);
@@ -60,13 +50,11 @@ public class CharacterDatabaseDAO implements CharacterDAO {
 
     @Override
     public void updateCharacter(SCharacter character) {
-        final String UPDATE_CHARACTER = "UPDATE teacher SET name = ?, description = ?, superpower = ?, isHero = ?, isVillain = ? WHERE id = ?";
+        final String UPDATE_CHARACTER = "UPDATE teacher SET name = ?, description = ?, superpower = ?, WHERE id = ?";
         jdbc.update(UPDATE_CHARACTER,
                 character.getName(),
                 character.getDescription(),
                 character.getSuperpower(),
-                character.getClass() == Hero.class,
-                character.getClass() == Villain.class,
                 character.getId());
     }
 
@@ -86,14 +74,10 @@ public class CharacterDatabaseDAO implements CharacterDAO {
         public SCharacter mapRow(ResultSet rs, int index) throws SQLException {
             SCharacter character = new SCharacter();
             character.setId(rs.getInt("id"));
-            character.setName(rs.getString("firstName"));
+            character.setName(rs.getString("name"));
             character.setDescription(rs.getString("description"));
             character.setSuperpower(rs.getString("superpower"));
-            boolean isHero = rs.getBoolean("isHero");
-            if (isHero) {
-                return (Hero) character;
-            }
-            return (Villain) character;
+            return character;
         }
     }
 }
