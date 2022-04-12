@@ -50,7 +50,7 @@ public class CharacterDatabaseDAO implements CharacterDAO {
 
     @Override
     public void updateCharacter(SCharacter character) {
-        final String UPDATE_CHARACTER = "UPDATE teacher SET name = ?, description = ?, superpower = ?, WHERE id = ?";
+        final String UPDATE_CHARACTER = "UPDATE Characters SET name = ?, description = ?, superpower = ? WHERE id = ?";
         jdbc.update(UPDATE_CHARACTER,
                 character.getName(),
                 character.getDescription(),
@@ -66,6 +66,7 @@ public class CharacterDatabaseDAO implements CharacterDAO {
         jdbc.update(DELETE_AFFILIATIONS, id);
         final String DELETE_SIGHTINGS = "DELETE FROM Sightings WHERE characterID = ?";
         jdbc.update(DELETE_SIGHTINGS, id);
+        //todo delete data from other tables
     }
 
     public static final class CharacterMapper implements RowMapper<SCharacter> {
