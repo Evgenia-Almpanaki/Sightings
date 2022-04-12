@@ -1,6 +1,6 @@
-package com.ariesight.sightings.dto.Characters;
+package com.ariesight.sightings.dto;
 
-import com.ariesight.sightings.dto.Organisations.Organisation;
+import com.ariesight.sightings.dto.Organisation;
 import java.util.ArrayList;
 import java.util.List;
 

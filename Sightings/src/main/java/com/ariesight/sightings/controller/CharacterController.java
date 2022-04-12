@@ -1,7 +1,7 @@
 package com.ariesight.sightings.controller;
 
 import com.ariesight.sightings.dao.CharacterDAO;
-import com.ariesight.sightings.dto.Characters.SCharacter;
+import com.ariesight.sightings.dto.SCharacter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

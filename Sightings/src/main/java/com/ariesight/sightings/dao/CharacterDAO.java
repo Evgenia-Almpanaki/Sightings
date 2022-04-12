@@ -1,6 +1,6 @@
 package com.ariesight.sightings.dao;
 
-import com.ariesight.sightings.dto.Characters.SCharacter;
+import com.ariesight.sightings.dto.SCharacter;
 import java.util.List;
 
 public interface CharacterDAO {
