@@ -11,7 +11,7 @@ CREATE TABLE Characters (
     isVillain BOOLEAN
 );
 CREATE TABLE Organisations (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     description MEDIUMTEXT,
     address VARCHAR(30),

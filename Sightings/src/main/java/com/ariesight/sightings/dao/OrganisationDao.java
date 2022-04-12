@@ -11,6 +11,6 @@ public interface OrganisationDAO {
     void updateOrganisation(Organisation organisation);
     void deleteOrganisationById(int id);
     
-    List<SCharacter> getOrganisationMembers(Organisation organisation);
-    List<Organisation> getOrganisationsOf(SCharacter character);
+    //List<SCharacter> getOrganisationMembers(Organisation organisation);
+    //List<Organisation> getOrganisationsOf(SCharacter character);
 }
