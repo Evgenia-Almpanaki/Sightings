@@ -3,7 +3,7 @@
 USE sightings;
 
 CREATE TABLE Characters (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     description MEDIUMTEXT,
     superpower VARCHAR(30),
@@ -42,9 +42,4 @@ CREATE TABLE Sightings (
         REFERENCES Locations (id)
 );
 
-INSERT INTO Characters  values (1, "ariel", "ocea nnn", "s1", 1, 0), (2, "triton", "seas ide", "s2", 0, 1);
-INSERT INTO Organisations (id, name) values (1, "SHIELD"), (2, "HYDRA"), (3, "AVENGERS");
-INSERT INTO Affiliations values (1, 2);
-INSERT INTO Affiliations values (2, 2);
-INSERT INTO Affiliations values (2, 1);
 
