@@ -35,29 +35,29 @@ public class OrganisationDatabaseDAO implements OrganisationDAO {
 
     @Override
     @Transactional
-    public Organisation addOrganisation(Organisation Organisation) {
+    public Organisation addOrganisation(Organisation organisation) {
 
         final String INSERT_ORGANISATION = "INSERT INTO Organisations(name, description, address, contact) VALUES(?,?,?,?)";
         jdbc.update(INSERT_ORGANISATION,
-                Organisation.getName(),
-                Organisation.getDescription(),
-                Organisation.getAddress(),
-                Organisation.getContact());
+                organisation.getName(),
+                organisation.getDescription(),
+                organisation.getAddress(),
+                organisation.getContact());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        Organisation.setId(newId);
-        return Organisation;
+        organisation.setId(newId);
+        return organisation;
     }
 
     @Override
-    public void updateOrganisation(Organisation Organisation) {
+    public void updateOrganisation(Organisation organisation) {
         final String UPDATE_ORGANISATION = "UPDATE Organisations SET name = ?, description = ?, address = ?, contact = ? WHERE id = ?";
         jdbc.update(UPDATE_ORGANISATION,
-                Organisation.getName(),
-                Organisation.getDescription(),
-                Organisation.getAddress(),
-                Organisation.getContact(),
-                Organisation.getId());
+                organisation.getName(),
+                organisation.getDescription(),
+                organisation.getAddress(),
+                organisation.getContact(),
+                organisation.getId());
     }
 
     @Override
@@ -73,13 +73,13 @@ public class OrganisationDatabaseDAO implements OrganisationDAO {
 
         @Override
         public Organisation mapRow(ResultSet rs, int index) throws SQLException {
-            Organisation Organisation = new Organisation();
-            Organisation.setId(rs.getInt("id"));
-            Organisation.setName(rs.getString("name"));
-            Organisation.setDescription(rs.getString("description"));
-            Organisation.setContact(rs.getString("contact"));
-            Organisation.setAddress(rs.getString("address"));
-            return Organisation;
+            Organisation organisation = new Organisation();
+            organisation.setId(rs.getInt("id"));
+            organisation.setName(rs.getString("name"));
+            organisation.setDescription(rs.getString("description"));
+            organisation.setContact(rs.getString("contact"));
+            organisation.setAddress(rs.getString("address"));
+            return organisation;
         }
     }
 }
