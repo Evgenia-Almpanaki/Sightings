@@ -36,67 +36,57 @@
     </div>
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Add Organisation</span>
+            <span class="h3">Add Sighting</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="addOrganisation" method="POST">
+            <form action="addSighting" method="POST">
                 <div class="form-group row">
-                    <label for="name" class="col-3 col-form-label">
-                        Name</label>
+                    <label for="character" class="col-3 col-form-label">
+                        Character Name</label>
                     <div class="col-9">
-                        <input type="text" name="name" id="name" class="form-control" />
+                        <input type="text" name="character" id="character" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="description" class="col-3 col-form-label">
-                        Description</label>
+                    <label for="location" class="col-3 col-form-label">
+                        Location Name</label>
                     <div class="col-9">
-                        <input type="text" name="description" id="description" class="form-control" />
+                        <input type="text" name="location" id="location" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="contact" class="col-3 col-form-label">
-                        Contact</label>
+                    <label for="date" class="col-3 col-form-label">
+                        Date</label>
                     <div class="col-9">
-                        <input type="text" name="contact" id="contact" class="form-control" />
+                        <input type="text" name="date" id="date" class="form-control" />
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="address" class="col-3 col-form-label">
-                        Address</label>
-                    <div class="col-9">
-                        <input type="text" name="address" id="address" class="form-control" />
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Organisation</button>
+                <button type="submit" class="btn btn-primary">Add Sighting</button>
             </form>
         </div>
     </div>
-
 
     <div class="row m-4 border border-dark">
         <div class="col text-center m-3">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Contact</th>
-                        <th>Address</th>
+                        <th>Sighting ID</th>
+                        <th>Character Name</th>
+                        <th>Location Name</th>
+                        <th>Date</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="organisation: ${organisations}">
-                        <td th:text="${organisation.id}">Organisation ID</td>
-                        <td th:text="${organisation.name}">Organisation Name</td>
-                        <td th:text="${organisation.description}">Organisation Description</td>
-                        <td th:text="${organisation.contact}">Organisation Contact</td>
-                        <td th:text="${organisation.address}">Organisation Address</td>
-                        <td><a href="#" th:href="@{/editOrganisation(id=${organisation.id})}">Edit</a></td>
-                        <td><a href="#" th:href="@{/deleteOrganisation(id=${organisation.id})}">Delete</a></td>
+                    <tr th:each="sighting: ${sightings}">
+                        <td th:text="${sighting.id}">Sighting ID</td>
+                        <td th:text="${sighting.characterName}">Character Name</td>
+                        <td th:text="${sighting.locationName}">Location Name</td>
+                        <td th:text="${sighting.date}">Date</td>
+                        <td><a href="#" th:href="@{/editSighting(id=${sighting.id})}">Edit</a></td>
+                        <td><a href="#" th:href="@{/deleteSighting(id=${sighting.id})}">Delete</a></td>
                     </tr>
                 </tbody>
             </table>

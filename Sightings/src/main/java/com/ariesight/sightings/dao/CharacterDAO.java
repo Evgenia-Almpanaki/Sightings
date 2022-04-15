@@ -9,5 +9,7 @@ public interface CharacterDAO {
     SCharacter addCharacter(SCharacter character);
     void updateCharacter(SCharacter character);
     void deleteCharacterById(int id);
+
+    SCharacter getCharacterByName(String characterName);
     
 }

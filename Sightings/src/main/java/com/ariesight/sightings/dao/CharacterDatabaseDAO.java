@@ -69,6 +69,16 @@ public class CharacterDatabaseDAO implements CharacterDAO {
         //todo delete data from other tables
     }
 
+    @Override
+    public SCharacter getCharacterByName(String characterName) {
+        try {
+            final String GET_CHARACTER_BY_NAME = "SELECT * FROM Characters WHERE name = ?";
+            return jdbc.queryForObject(GET_CHARACTER_BY_NAME, new CharacterMapper(), characterName);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
     public static final class CharacterMapper implements RowMapper<SCharacter> {
 
         @Override

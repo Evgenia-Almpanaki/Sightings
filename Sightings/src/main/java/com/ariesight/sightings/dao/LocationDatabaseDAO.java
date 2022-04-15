@@ -1,6 +1,7 @@
 package com.ariesight.sightings.dao;
 
 import com.ariesight.sightings.dto.Location;
+import com.ariesight.sightings.dto.SCharacter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -69,6 +70,16 @@ public class LocationDatabaseDAO implements LocationDAO {
         //todo delete data from other tables
     }
 
+    @Override
+    public Location getLocationByName(String locationName) {
+        try {
+            final String GET_LOCATION_BY_NAME = "SELECT * FROM Locations WHERE name = ?";
+            return jdbc.queryForObject(GET_LOCATION_BY_NAME, new LocationMapper(), locationName);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
     public static final class LocationMapper implements RowMapper<Location> {
 
         @Override
@@ -83,4 +94,5 @@ public class LocationDatabaseDAO implements LocationDAO {
             return location;
         }
     }
+
 }

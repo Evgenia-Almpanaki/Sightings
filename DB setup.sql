@@ -34,8 +34,10 @@ CREATE TABLE Locations (
     longitude VARCHAR(30)
 );
 CREATE TABLE Sightings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     characterID INT,
-    LocationID INT,
+    locationID INT,
+    date varchar(20),
     CONSTRAINT fk_CharacterS FOREIGN KEY (characterID)
         REFERENCES Characters (id),
     CONSTRAINT fk_Location FOREIGN KEY (LocationID)
