@@ -7,6 +7,7 @@ public class Sighting {
     private String characterName;
     private int locationID;
     private String locationName;
+    private String date;
 
     public String getLocationName() {
         return locationName;
@@ -15,7 +16,6 @@ public class Sighting {
     public void setLocationName(String locationName) {
         this.locationName = locationName;
     }
-    private String date;
 
     public int getCharacterID() {
         return characterID;

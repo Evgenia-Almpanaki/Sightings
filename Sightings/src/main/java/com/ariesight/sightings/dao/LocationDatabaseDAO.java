@@ -1,7 +1,6 @@
 package com.ariesight.sightings.dao;
 
 import com.ariesight.sightings.dto.Location;
-import com.ariesight.sightings.dto.SCharacter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;

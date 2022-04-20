@@ -1,13 +1,12 @@
 package com.ariesight.sightings.dto;
 
-import com.ariesight.sightings.dto.Organisation;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SCharacter {
 
-    public enum CharacterType {HERO, VILLAIN};
-    private int id; 
+    public enum CharacterType { HERO, VILLAIN };
+    private int id;
     private String name;
     private String description;
     private String superpower;

@@ -6,6 +6,11 @@ import java.util.List;
 public class Organisation {
 
     private int id;
+    private String name;
+    private String description;
+    private String address;
+    private String contact;
+    private List<SCharacter> members = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -14,11 +19,6 @@ public class Organisation {
     public void setId(int id) {
         this.id = id;
     }
-    private String name;
-    private String description;
-    private String address;
-    private String contact;
-    private List<SCharacter> members = new ArrayList<>();
 
     public String getName() {
         return name;

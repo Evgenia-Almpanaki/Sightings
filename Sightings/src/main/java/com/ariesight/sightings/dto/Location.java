@@ -3,6 +3,11 @@ package com.ariesight.sightings.dto;
 public class Location {
 
     private int id;
+    private String name;
+    private String description;
+    private String address;
+    private String latitude;
+    private String longitude;
 
     public int getId() {
         return id;
@@ -51,9 +56,4 @@ public class Location {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-    private String name;
-    private String description;
-    private String address;
-    private String latitude;
-    private String longitude;
 }
