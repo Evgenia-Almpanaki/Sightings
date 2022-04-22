@@ -1,7 +1,6 @@
 package com.ariesight.sightings.controller;
 
-import com.ariesight.sightings.dao.SightingDAO;
-import com.ariesight.sightings.dto.Sighting;
+import com.ariesight.sightings.dto.Sightings.Sighting;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.ariesight.sightings.dao.Sightings.HeroSightingDAO;
 
 @Controller
 public class SightingController {
 
     @Autowired
-    private SightingDAO sightingDAO;
-
+    private HeroSightingDAO sightingDAO;
+/*
     @PostMapping("addSighting")
     public String addSighting(HttpServletRequest request) {
 
@@ -66,5 +66,5 @@ public class SightingController {
 
         sightingDAO.updateSighting(sighting);
         return "redirect:/sightings";
-    }
+    }*/
 }

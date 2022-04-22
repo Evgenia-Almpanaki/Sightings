@@ -1,4 +1,6 @@
-package com.ariesight.sightings.dto;
+package com.ariesight.sightings.dto.Sightings;
+
+import java.util.Objects;
 
 public class Sighting {
 
@@ -55,6 +57,42 @@ public class Sighting {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sighting other = (Sighting) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.characterID != other.characterID) {
+            return false;
+        }
+        if (this.locationID != other.locationID) {
+            return false;
+        }
+        if (!Objects.equals(this.characterName, other.characterName)) {
+            return false;
+        }
+        if (!Objects.equals(this.locationName, other.locationName)) {
+            return false;
+        }
+        return Objects.equals(this.date, other.date);
     }
 
 }

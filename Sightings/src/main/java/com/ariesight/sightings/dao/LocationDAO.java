@@ -1,5 +1,7 @@
 package com.ariesight.sightings.dao;
 
+import com.ariesight.sightings.dto.Characters.Hero;
+import com.ariesight.sightings.dto.Characters.Villain;
 import com.ariesight.sightings.dto.Location;
 import java.util.List;
 
@@ -17,5 +19,7 @@ public interface LocationDAO {
 
     Location getLocationByName(String locationName);
 
-    //List<Location> getLocationsByCharacter(String name);
+    public List<Location> getLocationsByHero(Hero hero);
+
+    public List<Location> getLocationsByVillain(Villain villain);
 }

@@ -1,5 +1,7 @@
 package com.ariesight.sightings.dao;
 
+import com.ariesight.sightings.dto.Characters.Hero;
+import com.ariesight.sightings.dto.Characters.Villain;
 import com.ariesight.sightings.dto.Location;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,7 +68,6 @@ public class LocationDatabaseDAO implements LocationDAO {
     public void deleteLocationById(int id) {
         final String DELETE_LOCATION = "DELETE FROM Locations WHERE id = ?";
         jdbc.update(DELETE_LOCATION, id);
-        //todo delete data from other tables
     }
 
     @Override
@@ -77,6 +78,26 @@ public class LocationDatabaseDAO implements LocationDAO {
         } catch (DataAccessException ex) {
             return null;
         }
+    }
+
+    @Override
+    public List<Location> getLocationsByHero(Hero hero) {
+        final String GET_LOCATIONS_BY_CHARACTER = "SELECT Locations.id as \"id\", Locations.name as \"name\", Locations.description as \"description\", address, latitude, longitude\n" +
+                                        "FROM Superheroes\n" +
+                                        "INNER JOIN SuperheroSightings ON SuperheroSightings.characterID = Superheroes.id\n" +
+                                        "INNER JOIN Locations ON SuperheroSightings.locationID = Locations.id\n" +
+                                        "WHERE Superheroes.id = ?";
+        return jdbc.query(GET_LOCATIONS_BY_CHARACTER, new LocationMapper(), hero.getId());
+    }
+
+    @Override
+    public List<Location> getLocationsByVillain(Villain villain) {
+        final String GET_LOCATIONS_BY_CHARACTER = "SELECT Locations.id as \"id\", Locations.name as \"name\", Locations.description as \"description\", address, latitude, longitude\n" +
+                                                "FROM Villains\n" +
+                                                "INNER JOIN VillainSightings ON VillainSightings.characterID = Villains.id\n" +
+                                                "INNER JOIN Locations ON VillainSightings.locationID = Locations.id\n" +
+                                                "WHERE Villains.id = ?";
+        return jdbc.query(GET_LOCATIONS_BY_CHARACTER, new LocationMapper(), villain.getId());
     }
 
     public static final class LocationMapper implements RowMapper<Location> {

@@ -1,7 +1,6 @@
 package com.ariesight.sightings.controller;
 
-import com.ariesight.sightings.dao.OrganisationDAO;
-import com.ariesight.sightings.dto.Organisation;
+import com.ariesight.sightings.dto.Organisations.Organisation;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.ariesight.sightings.dao.Organisations.HeroOrganisationDAO;
 
 @Controller
 public class OrganisationController {
 
     @Autowired
-    private OrganisationDAO organisationDAO;
-
+    private HeroOrganisationDAO organisationDAO;
+/*
     @PostMapping("addOrganisation")
     public String addOrganisation(HttpServletRequest request) {
 
@@ -71,5 +71,5 @@ public class OrganisationController {
         organisationDAO.updateOrganisation(organisation);
 
         return "redirect:/organisations";
-    }
+    }*/
 }

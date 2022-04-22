@@ -1,15 +1,14 @@
-package com.ariesight.sightings.dto;
+package com.ariesight.sightings.dto.Organisations;
 
 import java.util.Objects;
 
-public class Location {
+public class Organisation {
 
     private int id;
     private String name;
     private String description;
     private String address;
-    private String latitude;
-    private String longitude;
+    private String contact;
 
     public int getId() {
         return id;
@@ -43,26 +42,12 @@ public class Location {
         this.address = address;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getContact() {
+        return contact;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     @Override
@@ -76,7 +61,7 @@ public class Location {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Location other = (Location) obj;
+        final Organisation other = (Organisation) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -89,11 +74,13 @@ public class Location {
         if (!Objects.equals(this.address, other.address)) {
             return false;
         }
-        if (!Objects.equals(this.latitude, other.latitude)) {
-            return false;
-        }
-        return Objects.equals(this.longitude, other.longitude);
+        return Objects.equals(this.contact, other.contact);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
 
 }
