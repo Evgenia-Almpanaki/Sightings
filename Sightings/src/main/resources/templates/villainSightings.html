@@ -14,32 +14,12 @@
 </head>
 
 <body>
-    <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1><a href="/index.html" class="text-dark">Sightings Manager</a></h1>
-        </div>
-    </div>
-    </div>
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-3">
-            <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-        </div>
-        <div class="col text-center m-3">
-            <a href="characters" class="btn btn-outline-primary btn-lg">Characters</a>
-        </div>
-        <div class="col text-center m-3">
-            <a href="organisations" class="btn btn-outline-primary btn-lg">Organisations</a>
-        </div>
-        <div class="col text-center m-3">
-            <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
-        </div>
-    </div>
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Add Sighting</span>
+            <span class="h3">Add Villain Sighting</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="addSighting" method="POST">
+            <form action="addSighting/villain" method="POST">
                 <div class="form-group row">
                     <label for="character" class="col-3 col-form-label">
                         Character Name</label>
@@ -61,7 +41,7 @@
                         <input type="text" name="date" id="date" class="form-control" />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Sighting</button>
+                <button type="submit" class="btn btn-primary">Add Villain Sighting</button>
             </form>
         </div>
     </div>
@@ -80,13 +60,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="sighting: ${sightings}">
+                    <tr th:each="sighting: ${villainSightings}">
                         <td th:text="${sighting.id}">Sighting ID</td>
                         <td th:text="${sighting.characterName}">Character Name</td>
                         <td th:text="${sighting.locationName}">Location Name</td>
                         <td th:text="${sighting.date}">Date</td>
-                        <td><a href="#" th:href="@{/editSighting(id=${sighting.id})}">Edit</a></td>
-                        <td><a href="#" th:href="@{/deleteSighting(id=${sighting.id})}">Delete</a></td>
+                        <td><a href="#" th:href="@{/editVillainSighting(id=${sighting.id})}">Edit</a></td>
+                        <td><a href="#" th:href="@{/deleteSighting/villain(id=${sighting.id})}">Delete</a></td>
                     </tr>
                 </tbody>
             </table>

@@ -10,43 +10,51 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Update Sighting</title>
+    <title>Update Villain Organisation</title>
 </head>
 
 <body>
 
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Edit Sighting</span>
+            <span class="h3">Edit Organisation</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="editSighting" method="POST">
+            <form action="editVillainOrganisation" method="POST">
                 <div class="form-group row">
-                    <label for="characterName" class="col-3 col-form-label">
-                        Character Name</label>
+                    <label for="name" class="col-3 col-form-label">
+                        Name</label>
                     <div class="col-9">
-                        <input type="text" name="characterName" id="characterName" class="form-control"
-                            th:value="${sighting.characterName}" />
+                        <input type="text" name="name" id="name" class="form-control" th:value="${organisation.name}" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="locationName" class="col-3 col-form-label">
-                        Location Name</label>
+                    <label for="description" class="col-3 col-form-label">
+                        Description</label>
                     <div class="col-9">
-                        <input type="text" name="locationName" id="locationName" class="form-control"
-                            th:value="${sighting.locationName}" />
+                        <input type="text" name="description" id="description" class="form-control"
+                            th:value="${organisation.description}" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="date" class="col-3 col-form-label">
-                        Date</label>
+                    <label for="contact" class="col-3 col-form-label">
+                        Contact</label>
                     <div class="col-9">
-                        <input type="text" name="date" id="date" class="form-control" th:value="${sighting.date}">
+                        <input type="text" name="contact" id="contact" class="form-control"
+                            th:value="${organisation.contact}">
                     </div>
                 </div>
-                <input type="hidden" name="id" th:value="${sighting.id}" />
+                <div class="form-group row">
+                    <label for="address" class="col-3 col-form-label">
+                        Address</label>
+                    <div class="col-9">
+                        <input type="text" name="address" id="address" class="form-control"
+                            th:value="${organisation.address}">
+                    </div>
+                </div>
+                <input type="hidden" name="id" th:value="${organisation.id}" />
                 <button type="submit" class="btn btn-primary">
-                    Update Sighting</button>
+                    Update Villain Organisation</button>
             </form>
         </div>
     </div>

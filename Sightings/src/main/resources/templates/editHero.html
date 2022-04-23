@@ -10,22 +10,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Update Organisation</title>
+    <title>Update Character</title>
 </head>
 
 <body>
 
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
-            <span class="h3">Edit Organisation</span>
+            <span class="h3">Edit Character</span>
         </div>
         <div class="col-7 text-center m-3">
-            <form action="editOrganisation" method="POST">
+            <form action="editHero" method="POST">
                 <div class="form-group row">
                     <label for="name" class="col-3 col-form-label">
                         Name</label>
                     <div class="col-9">
-                        <input type="text" name="name" id="name" class="form-control" th:value="${organisation.name}" />
+                        <input type="text" name="name" id="name" class="form-control" th:value="${character.name}" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -33,28 +33,20 @@
                         Description</label>
                     <div class="col-9">
                         <input type="text" name="description" id="description" class="form-control"
-                            th:value="${organisation.description}" />
+                            th:value="${character.description}" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="contact" class="col-3 col-form-label">
-                        Contact</label>
+                    <label for="superpower" class="col-3 col-form-label">
+                        Superpower</label>
                     <div class="col-9">
-                        <input type="text" name="contact" id="contact" class="form-control"
-                            th:value="${organisation.contact}">
+                        <input type="text" name="superpower" id="superpower" class="form-control"
+                            th:value="${character.superpower}">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="address" class="col-3 col-form-label">
-                        Address</label>
-                    <div class="col-9">
-                        <input type="text" name="address" id="address" class="form-control"
-                            th:value="${organisation.address}">
-                    </div>
-                </div>
-                <input type="hidden" name="id" th:value="${organisation.id}" />
+                <input type="hidden" name="id" th:value="${character.id}" />
                 <button type="submit" class="btn btn-primary">
-                    Update Organisation</button>
+                    Update Hero</button>
             </form>
         </div>
     </div>

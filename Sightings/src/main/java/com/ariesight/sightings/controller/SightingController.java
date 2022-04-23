@@ -9,62 +9,120 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.ariesight.sightings.dao.Sightings.HeroSightingDAO;
+import com.ariesight.sightings.dao.Sightings.VillainSightingDAO;
+import com.ariesight.sightings.dto.Sightings.HeroSighting;
+import com.ariesight.sightings.dto.Sightings.VillainSighting;
 
 @Controller
 public class SightingController {
 
     @Autowired
-    private HeroSightingDAO sightingDAO;
-/*
-    @PostMapping("addSighting")
-    public String addSighting(HttpServletRequest request) {
+    private HeroSightingDAO heroSightingDAO;
+    @Autowired
+    private VillainSightingDAO villainSightingDAO;
+
+    @PostMapping("addSighting/hero")
+    public String addHeroSighting(HttpServletRequest request) {
 
         String character = request.getParameter("character");
         String location = request.getParameter("location");
         String date = request.getParameter("date");
 
-        Sighting sighting = new Sighting();
+        HeroSighting sighting = new HeroSighting();
         sighting.setCharacterName(character);
         sighting.setLocationName(location);
         sighting.setDate(date);
 
-        sightingDAO.addSighting(sighting);
-        return "redirect:/sightings";
+        heroSightingDAO.addSighting(sighting);
+        return "redirect:/heroSightings";
     }
 
-    @GetMapping("sightings")
+    @GetMapping("heroSightings")
     public String displaySightings(Model model) {
-        List<Sighting> sightings = sightingDAO.getAllSightings();
-        model.addAttribute("sightings", sightings);
-        return "sightings";
+        List<HeroSighting> sightings = heroSightingDAO.getAllSightings();
+        model.addAttribute("heroSightings", sightings);
+        return "heroSightings";
     }
 
-    @GetMapping("deleteSighting")
-    public String deleteOrganisation(HttpServletRequest request) {
+    @GetMapping("deleteSighting/hero")
+    public String deleteHeroSighting(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        sightingDAO.deleteSightingById(id);
+        heroSightingDAO.deleteSightingById(id);
 
-        return "redirect:/sightings";
+        return "redirect:/heroSightings";
     }
 
-    @GetMapping("editSighting")
+    @GetMapping("editHeroSighting")
     public String editSighting(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
-        Sighting sighting = sightingDAO.getSightingById(id);
+        Sighting sighting = heroSightingDAO.getSightingById(id);
         model.addAttribute("sighting", sighting);
-        return "editSighting";
+        return "editHeroSighting";
     }
 
-    @PostMapping("editSighting")
+    @PostMapping("editHeroSighting")
     public String performEditSighting(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        Sighting sighting = sightingDAO.getSightingById(id);
+        HeroSighting sighting = heroSightingDAO.getSightingById(id);
 
         sighting.setCharacterName(request.getParameter("characterName"));
         sighting.setLocationName(request.getParameter("locationName"));
         sighting.setDate(request.getParameter("date"));
 
-        sightingDAO.updateSighting(sighting);
-        return "redirect:/sightings";
-    }*/
+        heroSightingDAO.updateSighting(sighting);
+        return "redirect:/heroSightings";
+    }
+    
+    
+    @PostMapping("addSighting/villain")
+    public String addVillainSighting(HttpServletRequest request) {
+
+        String character = request.getParameter("character");
+        String location = request.getParameter("location");
+        String date = request.getParameter("date");
+
+        VillainSighting sighting = new VillainSighting();
+        sighting.setCharacterName(character);
+        sighting.setLocationName(location);
+        sighting.setDate(date);
+
+        villainSightingDAO.addSighting(sighting);
+        return "redirect:/villainSightings";
+    }
+
+    @GetMapping("villainSightings")
+    public String displayVillainSightings(Model model) {
+        List<VillainSighting> sightings = villainSightingDAO.getAllSightings();
+        model.addAttribute("villainSightings", sightings);
+        return "villainSightings";
+    }
+
+    @GetMapping("deleteSighting/villain")
+    public String deleteVillainSighting(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        villainSightingDAO.deleteSightingById(id);
+
+        return "redirect:/villainSightings";
+    }
+
+    @GetMapping("editVillainSighting")
+    public String editVillainSighting(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Sighting sighting = villainSightingDAO.getSightingById(id);
+        model.addAttribute("sighting", sighting);
+        return "editVillainSighting";
+    }
+
+    @PostMapping("editVillainSighting")
+    public String performEditVillainSighting(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        VillainSighting sighting = villainSightingDAO.getSightingById(id);
+
+        sighting.setCharacterName(request.getParameter("characterName"));
+        sighting.setLocationName(request.getParameter("locationName"));
+        sighting.setDate(request.getParameter("date"));
+
+        villainSightingDAO.updateSighting(sighting);
+        return "redirect:/villainSightings";
+    }
 }
