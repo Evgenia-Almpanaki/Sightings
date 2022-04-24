@@ -9,12 +9,36 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link th:href="@{/site.css}" rel="stylesheet" />
 
     <title>Update Villain Organisation</title>
 </head>
 
 <body>
-
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <a href="index" class="btn btn-outline-primary btn-lg">Home</a>
+        </div>
+        <div class="col dropdown text-center m-3">
+            <button class="btn btn-outline-primary btn-lg">Heroes</button>
+            <div class="dropdown-content col text-center m-3">
+                <a href="heroes" class="btn btn-lg">Heroes</a>
+                <a href="heroSightings" class="btn btn-lg">Sightings</a>
+                <a href="heroOrganisations" class="btn btn-lg">Organisations</a>
+            </div>
+        </div>
+        <div class="col dropdown text-center m-3">
+            <button class="btn btn-outline-primary btn-lg">Villains</button>
+            <div class="dropdown-content col text-center m-3">
+                <a href="villains" class="btn btn-lg">Villains</a>
+                <a href="villainSightings" class="btn btn-lg">Sightings</a>
+                <a href="villainOrganisations" class="btn btn-lg">Organisations</a>
+            </div>
+        </div>
+        <div class="col text-center m-3">
+            <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
+        </div>
+    </div>
     <div class="row m-4 border border-dark">
         <div class="col-3 text-center m-3">
             <span class="h3">Edit Organisation</span>

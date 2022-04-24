@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.ariesight.sightings.dao.Sightings.HeroSightingDAO;
+import com.ariesight.sightings.dao.Sightings.SightingDAO;
 import com.ariesight.sightings.dao.Sightings.VillainSightingDAO;
 import com.ariesight.sightings.dto.Sightings.HeroSighting;
 import com.ariesight.sightings.dto.Sightings.VillainSighting;
@@ -19,8 +20,18 @@ public class SightingController {
     @Autowired
     private HeroSightingDAO heroSightingDAO;
     @Autowired
+    private SightingDAO sightingDAO;
+    @Autowired
     private VillainSightingDAO villainSightingDAO;
 
+    
+    @GetMapping("index")
+    public String displayAllSightings(Model model) {
+        List<Sighting> sightings = sightingDAO.getAllSightings();
+        model.addAttribute("index", sightings);
+        return "index";
+    }
+    
     @PostMapping("addSighting/hero")
     public String addHeroSighting(HttpServletRequest request) {
 

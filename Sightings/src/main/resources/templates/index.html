@@ -11,7 +11,7 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link th:href="@{/site.css}" rel="stylesheet" />
 
-    <title>Update Character</title>
+    <title>Sightings Registration</title>
 </head>
 
 <body>
@@ -40,41 +40,26 @@
         </div>
     </div>
     <div class="row m-4 border border-dark">
-        <div class="col-3 text-center m-3">
-            <span class="h3">Edit Character</span>
-        </div>
-        <div class="col-7 text-center m-3">
-            <form action="editVillain" method="POST">
-                <div class="form-group row">
-                    <label for="name" class="col-3 col-form-label">
-                        Name</label>
-                    <div class="col-9">
-                        <input type="text" name="name" id="name" class="form-control" th:value="${character.name}" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="description" class="col-3 col-form-label">
-                        Description</label>
-                    <div class="col-9">
-                        <input type="text" name="description" id="description" class="form-control"
-                            th:value="${character.description}" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="superpower" class="col-3 col-form-label">
-                        Superpower</label>
-                    <div class="col-9">
-                        <input type="text" name="superpower" id="superpower" class="form-control"
-                            th:value="${character.superpower}">
-                    </div>
-                </div>
-                <input type="hidden" name="id" th:value="${character.id}" />
-                <button type="submit" class="btn btn-primary">
-                    Update Villain</button>
-            </form>
+        <div class="col text-center m-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Character Name</th>
+                        <th>Location Name</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sighting: ${index}">
+                        <td th:text="${sighting.characterName}">Character Name</td>
+                        <td th:text="${sighting.locationName}">Location Name</td>
+                        <td th:text="${sighting.date}">Date</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    </div>
+    <!-- End main body -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

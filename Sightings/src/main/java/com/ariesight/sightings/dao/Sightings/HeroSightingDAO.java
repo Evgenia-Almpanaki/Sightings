@@ -1,7 +1,6 @@
 package com.ariesight.sightings.dao.Sightings;
 
 import com.ariesight.sightings.dto.Sightings.HeroSighting;
-import java.util.Date;
 import java.util.List;
 
 public interface HeroSightingDAO {
