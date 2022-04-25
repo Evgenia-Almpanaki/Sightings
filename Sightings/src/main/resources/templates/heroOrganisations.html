@@ -15,9 +15,15 @@
 </head>
 
 <body>
+    
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-ba570206-b7a7-4878-9d03-ff1595ebb3e8"></div>
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1><a href="index" class="text-dark">Sightings Manager</a></h1>
+        <div class="col">
+            <img th:src="@{images/logo.png}" alt="" width="300px" style="float: left;" />
+            <h1>
+                <a href="index" class="text-dark vertical-horizontal-centering">Sightings Manager</a>
+            </h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
@@ -50,6 +56,9 @@
         </div>
         <div class="col-7 text-center m-3">
             <form action="addOrganisation/hero" method="POST">
+                <div class="col-12 m-1 text-center" th:if="${!errors.isEmpty()}">
+                    <p class="alert alert-danger" th:each="error : ${errors}" th:text="${error.message}">Error message</p>
+                </div>
                 <div class="form-group row">
                     <label for="name" class="col-3 col-form-label">
                         Name</label>
@@ -89,7 +98,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Contact</th>
@@ -100,7 +108,6 @@
                 </thead>
                 <tbody>
                     <tr th:each="organisation: ${heroOrganisations}">
-                        <td th:text="${organisation.id}">Organisation ID</td>
                         <td th:text="${organisation.name}">Organisation Name</td>
                         <td th:text="${organisation.description}">Organisation Description</td>
                         <td th:text="${organisation.contact}">Organisation Contact</td>

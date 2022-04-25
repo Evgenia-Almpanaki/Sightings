@@ -16,8 +16,11 @@
 
 <body>
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1><a href="index" class="text-dark">Sightings Manager</a></h1>
+        <div class="col">
+            <img th:src="@{images/logo.png}" alt="" width="300px" style="float: left;" />
+            <h1>
+                <a href="index" class="text-dark vertical-horizontal-centering">Sightings Manager</a>
+            </h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
@@ -55,6 +58,10 @@
                         Name</label>
                     <div class="col-9">
                         <input type="text" name="name" id="name" class="form-control" th:value="${character.name}" />
+                        <div th:if="${#fields.hasErrors('character.name')}">
+                            <p th:each="error : ${#fields.errors('character.name')}" class="alert alert-danger"
+                                th:text="${error}"> Bad name format</p>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -63,6 +70,10 @@
                     <div class="col-9">
                         <input type="text" name="description" id="description" class="form-control"
                             th:value="${character.description}" />
+                        <div th:if="${#fields.hasErrors('character.description')}">
+                            <p th:each="error : ${#fields.errors('character.description')}" class="alert alert-danger"
+                                th:text="${error}"> Bad description format </p>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -71,6 +82,10 @@
                     <div class="col-9">
                         <input type="text" name="superpower" id="superpower" class="form-control"
                             th:value="${character.superpower}">
+                            <div th:if="${#fields.hasErrors('character.superpower')}">
+                                <p th:each="error : ${#fields.errors('character.superpower')}" class="alert alert-danger"
+                                    th:text="${error}"> Bad superpower format</p>
+                            </div>
                     </div>
                 </div>
                 <input type="hidden" name="id" th:value="${character.id}" />

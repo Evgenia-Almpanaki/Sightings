@@ -1,13 +1,22 @@
 package com.ariesight.sightings.dto.Organisations;
 
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class Organisation {
 
     private int id;
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 30, message = "Name must be less than 30 characters.")
     private String name;
+    @NotBlank(message = "Description must not be empty.")
     private String description;
+    @NotBlank(message = "Address must not be empty.")
+    @Size(max = 50, message = "Address must be less than 50 characters.")
     private String address;
+    @NotBlank(message = "Contact must not be empty.")
+    @Size(max = 20, message = "Contact must be less than 20 characters.")
     private String contact;
 
     public int getId() {

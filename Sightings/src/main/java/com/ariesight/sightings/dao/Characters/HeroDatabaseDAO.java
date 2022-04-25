@@ -31,7 +31,7 @@ public class HeroDatabaseDAO implements HeroDAO {
 
     @Override
     public List<Hero> getAllHeroes() {
-        final String GET_ALL_HEROES = "SELECT * FROM Superheroes";
+        final String GET_ALL_HEROES = "SELECT * FROM Superheroes order by Superheroes.name";
         return jdbc.query(GET_ALL_HEROES, new HeroMapper());
     }
 

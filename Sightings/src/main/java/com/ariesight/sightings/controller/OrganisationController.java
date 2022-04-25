@@ -12,6 +12,11 @@ import com.ariesight.sightings.dao.Organisations.HeroOrganisationDAO;
 import com.ariesight.sightings.dao.Organisations.VillainOrganisationDAO;
 import com.ariesight.sightings.dto.Organisations.HeroOrganisation;
 import com.ariesight.sightings.dto.Organisations.VillainOrganisation;
+import java.util.HashSet;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 
 @Controller
 public class OrganisationController {
@@ -21,6 +26,8 @@ public class OrganisationController {
 
     @Autowired
     private VillainOrganisationDAO villainOrganisationDAO;
+
+    Set<ConstraintViolation<Organisation>> violations = new HashSet<>();
 
     @PostMapping("addOrganisation/hero")
     public String addHeroOrganisation(HttpServletRequest request) {
@@ -36,7 +43,12 @@ public class OrganisationController {
         organisation.setContact(contact);
         organisation.setAddress(address);
 
-        heroOrganisationDAO.addOrganisation(organisation);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(organisation);
+
+        if (violations.isEmpty()) {
+            heroOrganisationDAO.addOrganisation(organisation);
+        }
         return "redirect:/heroOrganisations";
     }
 
@@ -44,6 +56,8 @@ public class OrganisationController {
     public String displayOrganisations(Model model) {
         List<HeroOrganisation> heroOrganisations = heroOrganisationDAO.getAllOrganisations();
         model.addAttribute("heroOrganisations", heroOrganisations);
+        model.addAttribute("errors", violations);
+
         return "heroOrganisations";
     }
 
@@ -92,15 +106,21 @@ public class OrganisationController {
         organisation.setDescription(description);
         organisation.setContact(contact);
         organisation.setAddress(address);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(organisation);
 
-        villainOrganisationDAO.addOrganisation(organisation);
+        if (violations.isEmpty()) {
+            villainOrganisationDAO.addOrganisation(organisation);
+        }
         return "redirect:/villainOrganisations";
     }
 
     @GetMapping("villainOrganisations")
     public String displayVillainOrganisations(Model model) {
-        List<VillainOrganisation> prganisations = villainOrganisationDAO.getAllOrganisations();
-        model.addAttribute("villainOrganisations", prganisations);
+        List<VillainOrganisation> organisations = villainOrganisationDAO.getAllOrganisations();
+        model.addAttribute("villainOrganisations", organisations);
+        model.addAttribute("errors", violations);
+
         return "villainOrganisations";
     }
 

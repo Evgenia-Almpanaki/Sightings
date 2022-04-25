@@ -30,7 +30,7 @@ public class HeroOrganisationDatabaseDAO implements HeroOrganisationDAO {
 
     @Override
     public List<HeroOrganisation> getAllOrganisations() {
-        final String GET_ALL_ORGANISATIONS = "SELECT * FROM SuperheroOrganisations";
+        final String GET_ALL_ORGANISATIONS = "SELECT * FROM SuperheroOrganisations order by SuperheroOrganisations.name";
         return jdbc.query(GET_ALL_ORGANISATIONS, new OrganisationMapper());
     }
 

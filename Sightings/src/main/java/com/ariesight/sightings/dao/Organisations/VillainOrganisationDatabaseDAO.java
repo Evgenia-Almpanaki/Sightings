@@ -32,7 +32,7 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
 
     @Override
     public List<VillainOrganisation> getAllOrganisations() {
-        final String GET_ALL_ORGANISATIONS = "SELECT * FROM VillainOrganisations";
+        final String GET_ALL_ORGANISATIONS = "SELECT * FROM VillainOrganisations order by VillainOrganisations.name";
         return jdbc.query(GET_ALL_ORGANISATIONS, new OrganisationMapper());
     }
 

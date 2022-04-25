@@ -16,8 +16,11 @@
 
 <body>
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1><a href="index" class="text-dark">Sightings Manager</a></h1>
+        <div class="col">
+            <img th:src="@{images/logo.png}" alt="" width="300px" style="float: left;" />
+            <h1>
+                <a href="index" class="text-dark vertical-horizontal-centering">Sightings Manager</a>
+            </h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
@@ -52,25 +55,33 @@
             <form action="editHeroSighting" method="POST">
                 <div class="form-group row">
                     <label for="characterName" class="col-3 col-form-label">
-                        Character Name</label>
+                        Character</label>
                     <div class="col-9">
-                        <input type="text" name="characterName" id="characterName" class="form-control"
-                            th:value="${sighting.characterName}" />
+                        <select id="character" name="characterId" class="form-control" >
+                            <option th:each="character : ${heroes}" 
+                                    th:value="${character.id}" 
+                                    th:text="${character.name}">
+                                Hero</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="locationName" class="col-3 col-form-label">
-                        Location Name</label>
+                        Location</label>
                     <div class="col-9">
-                        <input type="text" name="locationName" id="locationName" class="form-control"
-                            th:value="${sighting.locationName}" />
+                        <select id="location" name="locationId" class="form-control" >
+                            <option th:each="location : ${locations}" 
+                                    th:value="${location.id}" 
+                                    th:text="${location.name}">
+                                Location</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="date" class="col-3 col-form-label">
                         Date</label>
                     <div class="col-9">
-                        <input type="text" name="date" id="date" class="form-control" th:value="${sighting.date}">
+                        <input type="date" name="date" id="date" class="form-control" th:value="${sighting.date}">
                     </div>
                 </div>
                 <input type="hidden" name="id" th:value="${sighting.id}" />

@@ -1,14 +1,25 @@
 package com.ariesight.sightings.dto;
 
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class Location {
 
     private int id;
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 50, message = "Name must be less than 50 characters.")
     private String name;
+    @NotBlank(message = "Description must not be empty.")
     private String description;
+    @NotBlank(message = "Address must not be empty.")
+    @Size(max = 30, message = "Address must be less than 30 characters.")
     private String address;
+    @NotBlank(message = "Latitude must not be empty.")
+    @Size(max = 30, message = "Latitude must be less than 30 characters.")
     private String latitude;
+    @NotBlank(message = "Longitude must not be empty.")
+    @Size(max = 30, message = "Longitude must be less than 30 characters.")
     private String longitude;
 
     public int getId() {

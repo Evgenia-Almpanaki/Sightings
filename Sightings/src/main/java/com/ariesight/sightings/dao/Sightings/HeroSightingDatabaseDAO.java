@@ -43,7 +43,8 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
     public List<HeroSighting> getAllSightings() {
         final String GET_ALL_SIGHTINGS = "SELECT SuperheroSightings.id, characterID, locationID, date, Superheroes.name , Locations.name FROM SuperheroSightings "
                 + "join Locations on Locations.id = SuperheroSightings.locationID "
-                + "join Superheroes on Superheroes.id = SuperheroSightings.characterID";
+                + "join Superheroes on Superheroes.id = SuperheroSightings.characterID "
+                + "order by date desc";
         return jdbc.query(GET_ALL_SIGHTINGS, new SightingMapper());
     }
 

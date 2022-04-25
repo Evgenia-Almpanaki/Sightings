@@ -31,7 +31,7 @@ public class VillainDatabaseDAO implements VillainDAO {
 
     @Override
     public List<Villain> getAllVillains() {
-        final String GET_ALL_VILLAINS = "SELECT * FROM Villains";
+        final String GET_ALL_VILLAINS = "SELECT * FROM Villains order by Villains.name";
         return jdbc.query(GET_ALL_VILLAINS, new VillainMapper());
     }
 

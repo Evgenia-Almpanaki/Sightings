@@ -1,13 +1,20 @@
 package com.ariesight.sightings.dto.Characters;
 
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class SCharacter {
 
-    private int id;
-    private String name;
-    private String description;
-    private String superpower;
+    protected int id;
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 30, message = "Name must be less than 30 characters.")
+    protected String name;
+    @NotBlank(message = "Description must not be empty.")
+    protected String description;
+    @NotBlank(message = "Superpower must not be empty.")
+    @Size(max = 30, message = "Superpower must be less than 30 characters.")
+    protected String superpower;
 
     @Override
     public int hashCode() {

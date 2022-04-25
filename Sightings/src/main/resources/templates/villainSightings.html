@@ -15,9 +15,15 @@
 </head>
 
 <body>
+    
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-ba570206-b7a7-4878-9d03-ff1595ebb3e8"></div>
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1><a href="index" class="text-dark">Sightings Manager</a></h1>
+        <div class="col">
+            <img th:src="@{images/logo.png}" alt="" width="300px" style="float: left;" />
+            <h1>
+                <a href="index" class="text-dark vertical-horizontal-centering">Sightings Manager</a>
+            </h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
@@ -50,25 +56,38 @@
         </div>
         <div class="col-7 text-center m-3">
             <form action="addSighting/villain" method="POST">
+                <div class="col-12 m-1 text-center" th:if="${!errors.isEmpty()}">
+                    <p class="alert alert-danger" th:each="error : ${errors}" th:text="${error.message}">Error message</p>
+                </div>
                 <div class="form-group row">
                     <label for="character" class="col-3 col-form-label">
                         Character Name</label>
                     <div class="col-9">
-                        <input type="text" name="character" id="character" class="form-control" />
+                        <select id="character" name="characterId" class="form-control" >
+                            <option th:each="character : ${villains}" 
+                                    th:value="${character.id}" 
+                                    th:text="${character.name}">
+                                Villain</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="location" class="col-3 col-form-label">
                         Location Name</label>
                     <div class="col-9">
-                        <input type="text" name="location" id="location" class="form-control" />
+                        <select id="location" name="locationId" class="form-control" >
+                            <option th:each="location : ${locations}" 
+                                    th:value="${location.id}" 
+                                    th:text="${location.name}">
+                                Location</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="date" class="col-3 col-form-label">
                         Date</label>
                     <div class="col-9">
-                        <input type="text" name="date" id="date" class="form-control" />
+                        <input type="date" name="date" id="date" class="form-control" />
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Villain Sighting</button>
@@ -81,7 +100,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Sighting ID</th>
                         <th>Character Name</th>
                         <th>Location Name</th>
                         <th>Date</th>
@@ -91,7 +109,6 @@
                 </thead>
                 <tbody>
                     <tr th:each="sighting: ${villainSightings}">
-                        <td th:text="${sighting.id}">Sighting ID</td>
                         <td th:text="${sighting.characterName}">Character Name</td>
                         <td th:text="${sighting.locationName}">Location Name</td>
                         <td th:text="${sighting.date}">Date</td>

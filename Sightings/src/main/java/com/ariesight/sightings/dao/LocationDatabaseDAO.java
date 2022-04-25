@@ -22,7 +22,7 @@ public class LocationDatabaseDAO implements LocationDAO {
     @Override
     public Location getLocationById(int id) {
         try {
-            final String GET_LOCATION_BY_ID = "SELECT * FROM Locations WHERE id = ?";
+            final String GET_LOCATION_BY_ID = "SELECT * FROM Locations WHERE id = ? order by Locations.name";
             return jdbc.queryForObject(GET_LOCATION_BY_ID, new LocationMapper(), id);
         } catch (DataAccessException ex) {
             return null;

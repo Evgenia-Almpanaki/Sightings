@@ -43,7 +43,8 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
     public List<VillainSighting> getAllSightings() {
         final String GET_ALL_SIGHTINGS = "SELECT VillainSightings.id, characterID, locationID, date, Villains.name , Locations.name FROM VillainSightings "
                 + "join Locations on Locations.id = VillainSightings.locationID "
-                + "join Villains on Villains.id = VillainSightings.characterID";
+                + "join Villains on Villains.id = VillainSightings.characterID "
+                + "order by date desc";
         return jdbc.query(GET_ALL_SIGHTINGS, new SightingMapper());
     }
 

@@ -2,8 +2,13 @@ package com.ariesight.sightings.controller;
 
 import com.ariesight.sightings.dao.LocationDAO;
 import com.ariesight.sightings.dto.Location;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +20,8 @@ public class LocationController {
 
     @Autowired
     private LocationDAO locationDAO;
+
+    Set<ConstraintViolation<Location>> violations = new HashSet<>();
 
     @PostMapping("addLocation")
     public String addLocation(HttpServletRequest request) {
@@ -32,7 +39,12 @@ public class LocationController {
         location.setLongitude(longitude);
         location.setLatitude(latitude);
 
-        locationDAO.addLocation(location);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(location);
+
+        if (violations.isEmpty()) {
+            locationDAO.addLocation(location);
+        }
         return "redirect:/locations";
     }
 
@@ -40,6 +52,8 @@ public class LocationController {
     public String displayLocations(Model model) {
         List<Location> locations = locationDAO.getAllLocations();
         model.addAttribute("locations", locations);
+        model.addAttribute("errors", violations);
+
         return "locations";
     }
 

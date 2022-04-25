@@ -1,14 +1,18 @@
 package com.ariesight.sightings.dto.Sightings;
 
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
 
 public class Sighting {
 
     private int id;
     private int characterID;
+    @NotBlank(message = "Character name must not be empty.")
     private String characterName;
     private int locationID;
+    @NotBlank(message = "Location name must not be empty.")
     private String locationName;
+    @NotBlank(message = "Date must not be empty.")
     private String date;
 
     public String getLocationName() {
