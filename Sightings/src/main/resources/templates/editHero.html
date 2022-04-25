@@ -82,10 +82,21 @@
                     <div class="col-9">
                         <input type="text" name="superpower" id="superpower" class="form-control"
                             th:value="${character.superpower}">
-                            <div th:if="${#fields.hasErrors('character.superpower')}">
-                                <p th:each="error : ${#fields.errors('character.superpower')}" class="alert alert-danger"
-                                    th:text="${error}"> Bad superpower format</p>
-                            </div>
+                        <div th:if="${#fields.hasErrors('character.superpower')}">
+                            <p th:each="error : ${#fields.errors('character.superpower')}" class="alert alert-danger"
+                                th:text="${error}"> Bad superpower format</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="organisations" class="col-3 col-form-label">Organisations</label>
+                    <div class="col-9">
+                        <select multiple id="organisations" name="organisationId" class="form-control">
+                            <option th:each="organisation : ${organisations}" th:value="${organisation.id}"
+                                th:text="${organisation.name}"
+                                th:selected="${character.organisations.contains(organisation)}">
+                                Organisation Name</option>
+                        </select>
                     </div>
                 </div>
                 <input type="hidden" name="id" th:value="${character.id}" />
@@ -93,7 +104,6 @@
                     Update Hero</button>
             </form>
         </div>
-    </div>
     </div>
 
     <!-- Optional JavaScript -->

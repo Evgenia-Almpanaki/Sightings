@@ -16,7 +16,7 @@ public interface VillainOrganisationDAO {
 
     void deleteOrganisationById(int id);
 
-    public List<VillainOrganisation> getOrganisationsByVillain(Villain villain);
+    List<VillainOrganisation> getOrganisationsByVillain(Villain villain);
 
-    public void addAffiliation(VillainOrganisation organisation, Villain villain);
+    void addAffiliation(VillainOrganisation organisation, Villain villain);
 }

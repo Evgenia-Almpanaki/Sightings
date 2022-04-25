@@ -1,8 +1,6 @@
 package com.ariesight.sightings.dao.Organisations;
 
-import com.ariesight.sightings.dto.Characters.Hero;
 import com.ariesight.sightings.dto.Characters.Villain;
-import com.ariesight.sightings.dto.Organisations.HeroOrganisation;
 import com.ariesight.sightings.dto.Organisations.VillainOrganisation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,12 +69,21 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
 
     @Override
     public List<VillainOrganisation> getOrganisationsByVillain(Villain villain) {
-        final String GET_ORGANISATIONS_BY_VILLAIN = "SELECT VillainOrganisations.id as \"id\", VillainOrganisations.name as \"name\", VillainOrganisations.description as \"description\", address, contact\n" +
-                                                    "FROM Villains\n" +
-                                                    "INNER JOIN VillainAffiliations ON VillainAffiliations.villainID = Villains.id\n" +
-                                                    "INNER JOIN VillainOrganisations ON VillainAffiliations.villainOrganisationID = VillainOrganisations.id\n" +
-                                                    "WHERE Villains.id = ?";
+        final String GET_ORGANISATIONS_BY_VILLAIN = "SELECT VillainOrganisations.id as \"id\", VillainOrganisations.name as \"name\", VillainOrganisations.description as \"description\", address, contact\n"
+                + "FROM Villains\n"
+                + "INNER JOIN VillainAffiliations ON VillainAffiliations.villainID = Villains.id\n"
+                + "INNER JOIN VillainOrganisations ON VillainAffiliations.villainOrganisationID = VillainOrganisations.id\n"
+                + "WHERE Villains.id = ?";
         return jdbc.query(GET_ORGANISATIONS_BY_VILLAIN, new OrganisationMapper(), villain.getId());
+    }
+
+    @Override
+    public void addAffiliation(VillainOrganisation organisation, Villain villain) {
+
+        final String INSERT_ORGANISATION = "INSERT INTO VillainAffiliations(villainID, villainOrganisationID) VALUES(?,?)";
+        jdbc.update(INSERT_ORGANISATION,
+                villain.getId(),
+                organisation.getId());
     }
 
     public static final class OrganisationMapper implements RowMapper<VillainOrganisation> {
@@ -92,14 +99,5 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
             return organisation;
         }
     }
-    
-    
-    @Override
-    public void addAffiliation(VillainOrganisation organisation, Villain villain) {
-        
-        final String INSERT_ORGANISATION = "INSERT INTO VillainAffiliations(villainID, villainOrganisationID) VALUES(?,?)";
-        jdbc.update(INSERT_ORGANISATION,
-                villain.getId(),
-                organisation.getId());
-    }
+
 }

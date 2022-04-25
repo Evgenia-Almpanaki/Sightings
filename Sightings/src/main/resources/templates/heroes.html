@@ -57,7 +57,8 @@
         <div class="col-7 text-center m-3">
             <form action="addCharacter/hero" method="POST">
                 <div class="col-12 m-1 text-center" th:if="${!errors.isEmpty()}">
-                    <p class="alert alert-danger" th:each="error : ${errors}" th:text="${error.message}">Error message</p>
+                    <p class="alert alert-danger" th:each="error : ${errors}" th:text="${error.message}">Error message
+                    </p>
                 </div>
                 <div class="form-group row">
                     <label for="name" class="col-3 col-form-label">
@@ -78,6 +79,17 @@
                         Superpower</label>
                     <div class="col-9">
                         <input type="text" name="superpower" id="superpower" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="organisations" class="col-3 col-form-label">
+                        Organisations</label>
+                    <div class="col-9">
+                        <select multiple id="organisations" name="organisationId" class="form-control">
+                            <option th:each="organisation : ${organisations}" th:value="${organisation.id}"
+                                th:text="${organisation.name}">
+                                Organisation Name</option>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Character</button>

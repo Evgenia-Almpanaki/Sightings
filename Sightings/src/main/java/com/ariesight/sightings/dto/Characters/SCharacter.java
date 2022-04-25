@@ -1,5 +1,8 @@
 package com.ariesight.sightings.dto.Characters;
 
+import com.ariesight.sightings.dto.Organisations.HeroOrganisation;
+import com.ariesight.sightings.dto.Organisations.Organisation;
+import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -16,6 +19,16 @@ public class SCharacter {
     @Size(max = 30, message = "Superpower must be less than 30 characters.")
     protected String superpower;
 
+    protected List<Organisation> organisations;
+
+    public List<Organisation> getOrganisations() {
+        return organisations;
+    }
+
+    public void setOrganisations(List<Organisation> organisations) {
+        this.organisations = organisations;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

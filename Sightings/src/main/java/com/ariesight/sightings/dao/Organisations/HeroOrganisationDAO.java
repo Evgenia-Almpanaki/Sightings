@@ -16,7 +16,7 @@ public interface HeroOrganisationDAO {
 
     void deleteOrganisationById(int id);
 
-    public List<HeroOrganisation> getOrganisationsByHero(Hero hero);
+    List<HeroOrganisation> getOrganisationsByHero(Hero hero);
     
     void addAffiliation(HeroOrganisation organisation, Hero hero);
 }

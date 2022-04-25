@@ -69,17 +69,17 @@ public class HeroOrganisationDatabaseDAO implements HeroOrganisationDAO {
 
     @Override
     public List<HeroOrganisation> getOrganisationsByHero(Hero hero) {
-        final String GET_ORGANISATIONS_BY_HERO = "SELECT SuperheroOrganisations.id as \"id\", SuperheroOrganisations.name as \"name\", SuperheroOrganisations.description as \"description\", address, contact\n" +
-                                                "FROM Superheroes\n" +
-                                                "INNER JOIN SuperheroAffiliations ON SuperheroAffiliations.heroID = Superheroes.id\n" +
-                                                "INNER JOIN SuperheroOrganisations ON SuperheroAffiliations.organisationID = SuperheroOrganisations.id\n" +
-                                                "WHERE Superheroes.id = ?";
+        final String GET_ORGANISATIONS_BY_HERO = "SELECT SuperheroOrganisations.id as \"id\", SuperheroOrganisations.name as \"name\", SuperheroOrganisations.description as \"description\", address, contact\n"
+                + "FROM Superheroes\n"
+                + "INNER JOIN SuperheroAffiliations ON SuperheroAffiliations.heroID = Superheroes.id\n"
+                + "INNER JOIN SuperheroOrganisations ON SuperheroAffiliations.organisationID = SuperheroOrganisations.id\n"
+                + "WHERE Superheroes.id = ?";
         return jdbc.query(GET_ORGANISATIONS_BY_HERO, new OrganisationMapper(), hero.getId());
     }
 
     @Override
     public void addAffiliation(HeroOrganisation organisation, Hero hero) {
-        
+
         final String INSERT_ORGANISATION = "INSERT INTO SuperheroAffiliations(heroID, organisationID) VALUES(?,?)";
         jdbc.update(INSERT_ORGANISATION,
                 hero.getId(),

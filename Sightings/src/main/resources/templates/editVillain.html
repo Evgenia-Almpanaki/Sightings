@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link th:href="@{/site.css}" rel="stylesheet" />
+    <link th:href="@{/site.css}" rel="stylesheet" />
 
     <title>Update Character</title>
 </head>
@@ -58,6 +58,10 @@
                         Name</label>
                     <div class="col-9">
                         <input type="text" name="name" id="name" class="form-control" th:value="${character.name}" />
+                        <div th:if="${#fields.hasErrors('character.name')}">
+                            <p th:each="error : ${#fields.errors('character.name')}" class="alert alert-danger"
+                                th:text="${error}"> Bad name format</p>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -66,6 +70,10 @@
                     <div class="col-9">
                         <input type="text" name="description" id="description" class="form-control"
                             th:value="${character.description}" />
+                        <div th:if="${#fields.hasErrors('character.description')}">
+                            <p th:each="error : ${#fields.errors('character.description')}" class="alert alert-danger"
+                                th:text="${error}"> Bad description format </p>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -74,6 +82,21 @@
                     <div class="col-9">
                         <input type="text" name="superpower" id="superpower" class="form-control"
                             th:value="${character.superpower}">
+                        <div th:if="${#fields.hasErrors('character.superpower')}">
+                            <p th:each="error : ${#fields.errors('character.superpower')}" class="alert alert-danger"
+                                th:text="${error}"> Bad superpower format</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="organisations" class="col-3 col-form-label">Organisations</label>
+                    <div class="col-9">
+                        <select multiple id="organisations" name="organisationId" class="form-control">
+                            <option th:each="organisation : ${organisations}" th:value="${organisation.id}"
+                                th:text="${organisation.name}"
+                                th:selected="${character.organisations.contains(organisation)}">
+                                Organisation Name</option>
+                        </select>
                     </div>
                 </div>
                 <input type="hidden" name="id" th:value="${character.id}" />

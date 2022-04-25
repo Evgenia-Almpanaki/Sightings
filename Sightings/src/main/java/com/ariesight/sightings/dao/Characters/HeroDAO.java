@@ -18,7 +18,7 @@ public interface HeroDAO {
     void deleteHeroById(int id);
 
     Hero getHeroByName(String characterName);
-
+    
     public List<Hero> getHeroesByLocation(Location location);
 
     public List<Hero> getHeroesByOrganisation(HeroOrganisation organisation);
