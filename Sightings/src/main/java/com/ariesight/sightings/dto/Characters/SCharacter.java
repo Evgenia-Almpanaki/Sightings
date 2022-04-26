@@ -1,6 +1,5 @@
 package com.ariesight.sightings.dto.Characters;
 
-import com.ariesight.sightings.dto.Organisations.HeroOrganisation;
 import com.ariesight.sightings.dto.Organisations.Organisation;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +15,7 @@ public class SCharacter {
     @NotBlank(message = "Description must not be empty.")
     protected String description;
     @NotBlank(message = "Superpower must not be empty.")
-    @Size(max = 30, message = "Superpower must be less than 30 characters.")
+    @Size(max = 50, message = "Superpower must be less than 50 characters.")
     protected String superpower;
 
     protected List<Organisation> organisations;
