@@ -29,6 +29,11 @@ public class OrganisationController {
 
     Set<ConstraintViolation<Organisation>> violations = new HashSet<>();
 
+    /**
+     * Endpoint to add a hero organisation.
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("addOrganisation/hero")
     public String addHeroOrganisation(HttpServletRequest request) {
 
@@ -52,6 +57,11 @@ public class OrganisationController {
         return "redirect:/heroOrganisations";
     }
 
+    /**
+     * Endpoint to display hero organisations.
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("heroOrganisations")
     public String displayOrganisations(Model model) {
         List<HeroOrganisation> heroOrganisations = heroOrganisationDAO.getAllOrganisations();
@@ -61,6 +71,11 @@ public class OrganisationController {
         return "heroOrganisations";
     }
 
+    /**
+     * Endpoint to delete a hero organisation.
+     * @param request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteOrganisation/hero")
     public String deleteOrganisation(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -69,6 +84,12 @@ public class OrganisationController {
         return "redirect:/heroOrganisations";
     }
 
+    /**
+     * Endpoint to edit a hero organisation.
+     * @param request
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("editHeroOrganisation")
     public String editHeroOrganisation(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -78,6 +99,11 @@ public class OrganisationController {
         return "editHeroOrganisation";
     }
 
+    /**
+     * Endpoint to perform organisation editing.
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("editHeroOrganisation")
     public String performEditOrganisation(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -93,6 +119,11 @@ public class OrganisationController {
         return "redirect:/heroOrganisations";
     }
 
+    /**
+     * Endpoint to add a villain organisation.
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("addOrganisation/villain")
     public String addVillainOrganisation(HttpServletRequest request) {
 
@@ -115,6 +146,11 @@ public class OrganisationController {
         return "redirect:/villainOrganisations";
     }
 
+    /**
+     * Endpoint to display villain organisations.
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("villainOrganisations")
     public String displayVillainOrganisations(Model model) {
         List<VillainOrganisation> organisations = villainOrganisationDAO.getAllOrganisations();
@@ -124,6 +160,11 @@ public class OrganisationController {
         return "villainOrganisations";
     }
 
+    /**
+     * Endpoint to delete a villain organisation.
+     * @param request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteOrganisation/villain")
     public String deleteVillainOrganisation(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -132,6 +173,12 @@ public class OrganisationController {
         return "redirect:/villainOrganisations";
     }
 
+    /**
+     * Endpoint to edit a villain organisation.
+     * @param request
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("editVillainOrganisation")
     public String editVillainOrganisation(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -141,6 +188,11 @@ public class OrganisationController {
         return "editVillainOrganisation";
     }
 
+    /**
+     * 
+     * @param request
+     * @return 
+     */
     @PostMapping("editVillainOrganisation")
     public String performEditVillainOrganisation(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));

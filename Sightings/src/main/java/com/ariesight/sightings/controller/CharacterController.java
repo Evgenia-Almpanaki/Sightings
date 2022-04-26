@@ -39,6 +39,12 @@ public class CharacterController {
     private VillainDAO villainDAO;
     Set<ConstraintViolation<SCharacter>> violations = new HashSet<>();
 
+    /**
+     * Endpoint to add a new hero
+     *
+     * @param request The HTTP request
+     * @return The page to be redirected to.
+     */
     @PostMapping("addCharacter/hero")
     public String addHero(HttpServletRequest request) {
 
@@ -66,6 +72,12 @@ public class CharacterController {
         return "redirect:/heroes";
     }
 
+    /**
+     * Endpoint to display the heroes.
+     *
+     * @param model The model
+     * @return The page to be redirected to
+     */
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
         List<Hero> heroes = heroDAO.getAllHeroes();
@@ -75,6 +87,12 @@ public class CharacterController {
         return "heroes";
     }
 
+    /**
+     * Endpoint to delete a hero.
+     *
+     * @param request The HTTP request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteCharacter/hero")
     public String deleteHero(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -83,6 +101,13 @@ public class CharacterController {
         return "redirect:/heroes";
     }
 
+    /**
+     * Endpoint to edit a hero.
+     *
+     * @param id The hero id
+     * @param model The model
+     * @return The page to be redirected to
+     */
     @GetMapping("editHero")
     public String editHero(Integer id, Model model) {
 
@@ -92,6 +117,14 @@ public class CharacterController {
         return "editHero";
     }
 
+    /**
+     * Endpoint to perform hero editing.
+     *
+     * @param character The hero to be edited
+     * @param result
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("editHero")
     public String performEditHero(@Valid Hero character, BindingResult result, HttpServletRequest request) {
 
@@ -109,6 +142,12 @@ public class CharacterController {
         return "redirect:/heroes";
     }
 
+    /**
+     * Endpoint to add a new Villain
+     *
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("addCharacter/villain")
     public String addVillain(HttpServletRequest request) {
 
@@ -136,6 +175,12 @@ public class CharacterController {
         return "redirect:/villains";
     }
 
+    /**
+     * Endpoint to display all villains
+     *
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("villains")
     public String displayVillains(Model model) {
         List<Villain> villains = villainDAO.getAllVillains();
@@ -145,6 +190,12 @@ public class CharacterController {
         return "villains";
     }
 
+    /**
+     * Endpoint to dele a villain
+     *
+     * @param request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteCharacter/villain")
     public String deleteVillain(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -153,6 +204,13 @@ public class CharacterController {
         return "redirect:/villains";
     }
 
+    /**
+     * Endpoint to edit a villain
+     *
+     * @param id The villain id
+     * @param model The model
+     * @return The page to be redirected to
+     */
     @GetMapping("editVillain")
     public String editVillain(Integer id, Model model) {
 
@@ -162,6 +220,14 @@ public class CharacterController {
         return "editVillain";
     }
 
+    /**
+     * Endpoint to perform villain editing
+     *
+     * @param character The villain to be edited
+     * @param result
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("editVillain")
     public String performEditVillain(@Valid Villain character, BindingResult result, HttpServletRequest request) {
 

@@ -23,6 +23,12 @@ public class LocationController {
 
     Set<ConstraintViolation<Location>> violations = new HashSet<>();
 
+    /**
+     * Endpoint to add a new location.
+     *
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("addLocation")
     public String addLocation(HttpServletRequest request) {
 
@@ -48,6 +54,12 @@ public class LocationController {
         return "redirect:/locations";
     }
 
+    /**
+     * Endpoint to display all locations
+     *
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("locations")
     public String displayLocations(Model model) {
         List<Location> locations = locationDAO.getAllLocations();
@@ -57,6 +69,12 @@ public class LocationController {
         return "locations";
     }
 
+    /**
+     * Endpoint to delete a location
+     *
+     * @param request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteLocation")
     public String deleteLocation(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -65,6 +83,13 @@ public class LocationController {
         return "redirect:/locations";
     }
 
+    /**
+     * Endpoint to edit a location
+     *
+     * @param request
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("editLocation")
     public String editLocation(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -74,6 +99,12 @@ public class LocationController {
         return "editLocation";
     }
 
+    /**
+     * Endpoint to perform location editing
+     *
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("editLocation")
     public String performEditLocation(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
