@@ -1,5 +1,7 @@
 package com.ariesight.sightings.controller;
 
+import com.ariesight.sightings.dao.Characters.HeroDAO;
+import com.ariesight.sightings.dao.Characters.VillainDAO;
 import com.ariesight.sightings.dto.Organisations.Organisation;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.ariesight.sightings.dao.Organisations.HeroOrganisationDAO;
 import com.ariesight.sightings.dao.Organisations.VillainOrganisationDAO;
+import com.ariesight.sightings.dto.Characters.Hero;
+import com.ariesight.sightings.dto.Characters.SCharacter;
+import com.ariesight.sightings.dto.Characters.Villain;
 import com.ariesight.sightings.dto.Organisations.HeroOrganisation;
 import com.ariesight.sightings.dto.Organisations.VillainOrganisation;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -23,6 +29,10 @@ public class OrganisationController {
 
     @Autowired
     private HeroOrganisationDAO heroOrganisationDAO;
+    @Autowired
+    private VillainDAO villainDAO;
+    @Autowired
+    private HeroDAO heroDAO;
 
     @Autowired
     private VillainOrganisationDAO villainOrganisationDAO;
@@ -198,7 +208,7 @@ public class OrganisationController {
     }
 
     /**
-     * Endpoint to permorm villain organisation editing
+     * Endpoint to permorm villain organisation editing.
      *
      * @param request
      * @return
@@ -216,5 +226,43 @@ public class OrganisationController {
         villainOrganisationDAO.updateOrganisation(organisation);
 
         return "redirect:/villainOrganisations";
+    }
+
+    /**
+     * Get the details for a villain organisation.
+     *
+     * @param id The organisation id
+     * @param model
+     * @return The page to be redirected to
+     */
+    @GetMapping("villainOrganisationDetail")
+    public String villainOrganisationDetail(Integer id, Model model) {
+        Organisation organisation = villainOrganisationDAO.getOrganisationById(id);
+        List<SCharacter> characters = new ArrayList<>();
+        for (Villain villain : villainDAO.getVillainsByOrganisation((VillainOrganisation) organisation)) {
+            characters.add(villain);
+        }
+        organisation.setMembers(characters);
+        model.addAttribute("organisation", organisation);
+        return "villainOrganisationDetail";
+    }
+
+    /**
+     * Get the details for a villain organisation.
+     *
+     * @param id The organisation id
+     * @param model
+     * @return The page to be redirected to
+     */
+    @GetMapping("heroOrganisationDetail")
+    public String heroOrganisationDetail(Integer id, Model model) {
+        Organisation organisation = heroOrganisationDAO.getOrganisationById(id);
+        List<SCharacter> characters = new ArrayList<>();
+        for (Hero hero : heroDAO.getHeroesByOrganisation((HeroOrganisation) organisation)) {
+            characters.add(hero);
+        }
+        organisation.setMembers(characters);
+        model.addAttribute("organisation", organisation);
+        return "heroOrganisationDetail";
     }
 }

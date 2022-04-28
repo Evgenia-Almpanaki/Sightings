@@ -1,5 +1,7 @@
 package com.ariesight.sightings.dto.Organisations;
 
+import com.ariesight.sightings.dto.Characters.SCharacter;
+import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,7 +20,16 @@ public class Organisation {
     @NotBlank(message = "Contact must not be empty.")
     @Size(max = 20, message = "Contact must be less than 20 characters.")
     private String contact;
+    private List<SCharacter> members;
 
+    public List<SCharacter> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<SCharacter> members) {
+        this.members = members;
+    }
+    
     public int getId() {
         return id;
     }
