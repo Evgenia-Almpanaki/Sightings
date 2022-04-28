@@ -26,6 +26,12 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
     @Autowired
     LocationDAO locationDAO;
 
+    /**
+     * Returns the sighting with the given id.
+     *
+     * @param id The id of the sighting
+     * @return The sighting
+     */
     @Override
     public VillainSighting getSightingById(int id) {
         try {
@@ -39,6 +45,11 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
         }
     }
 
+    /**
+     * Returns all the villain sightings.
+     *
+     * @return A list of sightings.
+     */
     @Override
     public List<VillainSighting> getAllSightings() {
         final String GET_ALL_SIGHTINGS = "SELECT VillainSightings.id, characterID, locationID, date, Villains.name , Locations.name FROM VillainSightings "
@@ -48,6 +59,12 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
         return jdbc.query(GET_ALL_SIGHTINGS, new SightingMapper());
     }
 
+    /**
+     * Adds a new sighting.
+     *
+     * @param sighting The sighting to be added
+     * @return The sighting with the updated id.
+     */
     @Override
     public VillainSighting addSighting(VillainSighting sighting) {
         final String INSERT_SIGHTING = "INSERT INTO VillainSightings(characterID, locationID, date) VALUES(?,?,?)";
@@ -64,6 +81,11 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
         return sighting;
     }
 
+    /**
+     * Updates a sighting.
+     *
+     * @param sighting The sighting to be updated
+     */
     @Override
     public void updateSighting(VillainSighting sighting) {
         final String UPDATE_LOCATION = "UPDATE VillainSightings SET characterID = ?, locationID = ?, date = ? WHERE id = ?";
@@ -76,6 +98,11 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
                 sighting.getId());
     }
 
+    /**
+     * Deletes the sighting with the given id.
+     *
+     * @param id The id of the sighting to be deleted
+     */
     @Override
     public void deleteSightingById(int id) {
         final String DELETE_SIGHTING = "DELETE FROM VillainSightings WHERE id = ?";
@@ -83,16 +110,25 @@ public class VillainSightingDatabaseDAO implements VillainSightingDAO {
 
     }
 
+    /**
+     * Returns all the villain sightings on the given date.
+     *
+     * @param date The date
+     * @return A list of sightings
+     */
     @Override
     public List<VillainSighting> getVillainSightingsByDate(String date) {
-        final String GET_SIGHTINGS_BY_DATE = "SELECT * \n" +
-                                            "FROM VillainSightings\n" +
-                                            "INNER JOIN Villains ON Villains.id = VillainSightings.characterID\n" +
-                                            "INNER JOIN Locations ON Locations.id = VillainSightings.locationID\n" +
-                                            "WHERE date = ?";
+        final String GET_SIGHTINGS_BY_DATE = "SELECT * \n"
+                + "FROM VillainSightings\n"
+                + "INNER JOIN Villains ON Villains.id = VillainSightings.characterID\n"
+                + "INNER JOIN Locations ON Locations.id = VillainSightings.locationID\n"
+                + "WHERE date = ?";
         return jdbc.query(GET_SIGHTINGS_BY_DATE, new SightingMapper(), date);
     }
 
+    /**
+     * Class that maps VillainSighting objects
+     */
     public static final class SightingMapper implements RowMapper<VillainSighting> {
 
         @Override

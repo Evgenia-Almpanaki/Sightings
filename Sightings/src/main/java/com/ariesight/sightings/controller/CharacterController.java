@@ -62,11 +62,15 @@ public class CharacterController {
         violations = validate.validate(hero);
 
         if (violations.isEmpty()) {
-            for (String organisationId : organisationIds) {
-                HeroOrganisation organisation = heroOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId));
-                organisations.add(organisation);
+            if (organisationIds != null) {
+                for (String organisationId : organisationIds) {
+                    HeroOrganisation organisation = heroOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId));
+                    organisations.add(organisation);
+                }
+                hero.setOrganisations(organisations);
+            } else {
+                hero.setOrganisations(new ArrayList<>());
             }
-            hero.setOrganisations(organisations);
             heroDAO.addHero(hero);
         }
         return "redirect:/heroes";
@@ -131,8 +135,10 @@ public class CharacterController {
         String[] organisationIds = request.getParameterValues("organisationId");
 
         List<Organisation> organisations = new ArrayList<>();
-        for (String organisationId : organisationIds) {
-            organisations.add(heroOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId)));
+        if (organisationIds != null) {
+            for (String organisationId : organisationIds) {
+                organisations.add(heroOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId)));
+            }
         }
         character.setOrganisations(organisations);
         heroDAO.updateHero(character);
@@ -143,7 +149,7 @@ public class CharacterController {
     }
 
     /**
-     * Endpoint to add a new Villain
+     * Endpoint to add a new Villain.
      *
      * @param request
      * @return The page to be redirected to
@@ -165,18 +171,22 @@ public class CharacterController {
         violations = validate.validate(villain);
 
         if (violations.isEmpty()) {
-            for (String organisationId : organisationIds) {
-                VillainOrganisation organisation = villainOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId));
-                organisations.add(organisation);
+            if (organisationIds != null) {
+                for (String organisationId : organisationIds) {
+                    VillainOrganisation organisation = villainOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId));
+                    organisations.add(organisation);
+                }
+                villain.setOrganisations(organisations);
+            } else {
+                villain.setOrganisations(new ArrayList<>());
             }
-            villain.setOrganisations(organisations);
             villainDAO.addVillain(villain);
         }
         return "redirect:/villains";
     }
 
     /**
-     * Endpoint to display all villains
+     * Endpoint to display all villains.
      *
      * @param model
      * @return The page to be redirected to
@@ -191,7 +201,7 @@ public class CharacterController {
     }
 
     /**
-     * Endpoint to dele a villain
+     * Endpoint to dele a villain.
      *
      * @param request
      * @return The page to be redirected to
@@ -205,7 +215,7 @@ public class CharacterController {
     }
 
     /**
-     * Endpoint to edit a villain
+     * Endpoint to edit a villain.
      *
      * @param id The villain id
      * @param model The model
@@ -234,8 +244,10 @@ public class CharacterController {
         String[] organisationIds = request.getParameterValues("organisationId");
 
         List<Organisation> organisations = new ArrayList<>();
-        for (String organisationId : organisationIds) {
-            organisations.add(villainOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId)));
+        if (organisationIds != null) {
+            for (String organisationId : organisationIds) {
+                organisations.add(villainOrganisationDAO.getOrganisationById(Integer.parseInt(organisationId)));
+            }
         }
         character.setOrganisations(organisations);
         villainDAO.updateVillain(character);

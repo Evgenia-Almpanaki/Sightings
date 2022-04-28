@@ -25,6 +25,12 @@ public class HeroDatabaseDAO implements HeroDAO {
     @Autowired
     HeroOrganisationDAO organisationDAO;
 
+    /**
+     * Returns the hero with the given id.
+     *
+     * @param id The id of the hero
+     * @return A Hero object
+     */
     @Override
     public Hero getHeroById(int id) {
         try {
@@ -41,6 +47,11 @@ public class HeroDatabaseDAO implements HeroDAO {
         }
     }
 
+    /**
+     * Returns a list with all the heroes.
+     *
+     * @return A list of heroes
+     */
     @Override
     public List<Hero> getAllHeroes() {
         final String GET_ALL_HEROES = "SELECT * FROM Superheroes order by Superheroes.name";
@@ -49,6 +60,12 @@ public class HeroDatabaseDAO implements HeroDAO {
         return heroes;
     }
 
+    /**
+     * Updates the associations between all the heroes in the list and their
+     * organisations.
+     *
+     * @param heroes The list of heroes to be associated
+     */
     private void associateOrganisationsWithHeroes(List<Hero> heroes) {
         for (Hero hero : heroes) {
             List<Organisation> organisations = new ArrayList<>();
@@ -59,6 +76,12 @@ public class HeroDatabaseDAO implements HeroDAO {
         }
     }
 
+    /**
+     * Adds a new hero.
+     *
+     * @param hero The hero to be added
+     * @return A Hero object
+     */
     @Override
     @Transactional
     public Hero addHero(Hero hero) {
@@ -75,6 +98,11 @@ public class HeroDatabaseDAO implements HeroDAO {
         return hero;
     }
 
+    /**
+     * Adds the associations of a hero in the database.
+     *
+     * @param hero The hero
+     */
     private void insertAffiliations(Hero hero) {
 
         final String INSERT_AFFILIATION = "INSERT INTO SuperheroAffiliations(heroID, organisationID) VALUES(?,?)";
@@ -82,9 +110,13 @@ public class HeroDatabaseDAO implements HeroDAO {
         for (Organisation organisation : hero.getOrganisations()) {
             jdbc.update(INSERT_AFFILIATION, hero.getId(), organisation.getId());
         }
-
     }
 
+    /**
+     * Updates a hero.
+     *
+     * @param hero The hero to be updated
+     */
     @Override
     @Transactional
     public void updateHero(Hero hero) {
@@ -105,12 +137,23 @@ public class HeroDatabaseDAO implements HeroDAO {
                 hero.getId());
     }
 
+    /**
+     * Deletes the hero with the given id.
+     *
+     * @param id The id of the hero
+     */
     @Override
     public void deleteHeroById(int id) {
         final String DELETE_HERO = "DELETE FROM Superheroes WHERE id = ?";
         jdbc.update(DELETE_HERO, id);
     }
 
+    /**
+     * Returns the hero with the given name.
+     *
+     * @param heroName The name of the character
+     * @return The hero with the given name
+     */
     @Override
     public Hero getHeroByName(String heroName) {
         try {
@@ -121,6 +164,12 @@ public class HeroDatabaseDAO implements HeroDAO {
         }
     }
 
+    /**
+     * Returns all the heroes seen in the given location.
+     *
+     * @param location The location
+     * @return A list of heroes
+     */
     @Override
     public List<Hero> getHeroesByLocation(Location location) {
         final String GET_ALL_HEROES_BY_LOCATION = "SELECT Superheroes.id as \"id\", Superheroes.name as \"name\", Superheroes.description as \"description\", superpower \n"
@@ -131,6 +180,12 @@ public class HeroDatabaseDAO implements HeroDAO {
         return jdbc.query(GET_ALL_HEROES_BY_LOCATION, new HeroMapper(), location.getId());
     }
 
+    /**
+     * Returns all the heroes in a given organisation.
+     *
+     * @param organisation The organiastion
+     * @return A list of heroes
+     */
     @Override
     public List<Hero> getHeroesByOrganisation(HeroOrganisation organisation) {
         final String GET_ALL_HEROES_BY_ORGANISATION = "SELECT Superheroes.id as \"id\", Superheroes.name as \"name\", Superheroes.description as \"description\", superpower \n"
@@ -142,6 +197,9 @@ public class HeroDatabaseDAO implements HeroDAO {
         return jdbc.query(GET_ALL_HEROES_BY_ORGANISATION, new HeroMapper(), organisation.getId());
     }
 
+    /**
+     * Class to map Hero objects
+     */
     public static final class HeroMapper implements RowMapper<Hero> {
 
         @Override

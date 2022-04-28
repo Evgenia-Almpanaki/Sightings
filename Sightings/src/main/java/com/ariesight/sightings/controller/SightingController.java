@@ -43,13 +43,26 @@ public class SightingController {
 
     Set<ConstraintViolation<Sighting>> violations = new HashSet<>();
 
+    /**
+     * Displays the most recent sightings.
+     *
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("index")
-    public String displayAllSightings(Model model) {
-        List<Sighting> sightings = sightingDAO.getAllSightings();
+    public String displayRecentSightings(Model model) {
+        List<Sighting> sightings = sightingDAO.getRecentSightings();
         model.addAttribute("index", sightings);
         return "index";
     }
 
+    /**
+     * Adds a new hero sighting.
+     *
+     * @param sighting The sighting to be added
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("addSighting/hero")
     public String addHeroSighting(HeroSighting sighting, HttpServletRequest request) {
 
@@ -74,6 +87,12 @@ public class SightingController {
         return "redirect:/heroSightings";
     }
 
+    /**
+     * Endpoint to display hero sightings.
+     *
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("heroSightings")
     public String displaySightings(Model model) {
         List<HeroSighting> sightings = heroSightingDAO.getAllSightings();
@@ -87,6 +106,12 @@ public class SightingController {
         return "heroSightings";
     }
 
+    /**
+     * Endpoint to delete a hero sighting.
+     *
+     * @param request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteSighting/hero")
     public String deleteHeroSighting(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -95,6 +120,13 @@ public class SightingController {
         return "redirect:/heroSightings";
     }
 
+    /**
+     * Endpoint to edit a hero sighting.
+     *
+     * @param id The id of the hero sighting to be edited
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("editHeroSighting")
     public String editSighting(Integer id, Model model) {
         Sighting sighting = heroSightingDAO.getSightingById(id);
@@ -106,6 +138,13 @@ public class SightingController {
         return "editHeroSighting";
     }
 
+    /**
+     * Endpoint to perform a hero sighting.
+     *
+     * @param sighting The hero sighting to be edited
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("editHeroSighting")
     public String performEditSighting(HeroSighting sighting, HttpServletRequest request) {
 
@@ -126,6 +165,12 @@ public class SightingController {
         return "redirect:/heroSightings";
     }
 
+    /**
+     * Endpoint to add a new sighting.
+     * @param sighting The sighting to be added
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("addSighting/villain")
     public String addVillainSighting(VillainSighting sighting, HttpServletRequest request) {
 
@@ -151,6 +196,11 @@ public class SightingController {
         return "redirect:/villainSightings";
     }
 
+    /**
+     * Endpoint to display villain sightings.
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("villainSightings")
     public String displayVillainSightings(Model model) {
 
@@ -164,6 +214,11 @@ public class SightingController {
         return "villainSightings";
     }
 
+    /**
+     * Endpoint to delete a villain sighting.
+     * @param request
+     * @return The page to be redirected to
+     */
     @GetMapping("deleteSighting/villain")
     public String deleteVillainSighting(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -172,6 +227,12 @@ public class SightingController {
         return "redirect:/villainSightings";
     }
 
+    /**
+     * Endpoint to edit a villain sighting.
+     * @param id The id of the sighting to be edited.
+     * @param model
+     * @return The page to be redirected to
+     */
     @GetMapping("editVillainSighting")
     public String editVillainSighting(Integer id, Model model) {
 
@@ -183,10 +244,16 @@ public class SightingController {
         model.addAttribute("sighting", sighting);
         return "editVillainSighting";
     }
-    
+
+    /**
+     * Endpoint to perform a villain sighting editing.
+     * @param sighting The villain sighting to be edited
+     * @param request
+     * @return The page to be redirected to
+     */
     @PostMapping("editVillainSighting")
     public String performEditVillainSighting(VillainSighting sighting, HttpServletRequest request) {
-        
+
         String characterId = request.getParameter("characterId");
         String locationId = request.getParameter("locationId");
         String date = request.getParameter("date");

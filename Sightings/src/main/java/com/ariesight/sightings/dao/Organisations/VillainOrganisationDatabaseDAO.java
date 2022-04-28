@@ -18,6 +18,12 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
     @Autowired
     JdbcTemplate jdbc;
 
+    /**
+     * Returns the organisation with the given id.
+     *
+     * @param id The id of the organisation
+     * @return The organisation
+     */
     @Override
     public VillainOrganisation getOrganisationById(int id) {
         try {
@@ -28,12 +34,23 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
         }
     }
 
+    /**
+     * Returns all organisations.
+     *
+     * @return A list of organisations
+     */
     @Override
     public List<VillainOrganisation> getAllOrganisations() {
         final String GET_ALL_ORGANISATIONS = "SELECT * FROM VillainOrganisations order by VillainOrganisations.name";
         return jdbc.query(GET_ALL_ORGANISATIONS, new OrganisationMapper());
     }
 
+    /**
+     * Adds a new organisation.
+     *
+     * @param organisation The organisation to be added
+     * @return The organisation
+     */
     @Override
     @Transactional
     public VillainOrganisation addOrganisation(VillainOrganisation organisation) {
@@ -50,6 +67,11 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
         return organisation;
     }
 
+    /**
+     * Updates an organisation.
+     *
+     * @param organisation The organisation to be updated
+     */
     @Override
     public void updateOrganisation(VillainOrganisation organisation) {
         final String UPDATE_ORGANISATION = "UPDATE VillainOrganisations SET name = ?, description = ?, address = ?, contact = ? WHERE id = ?";
@@ -61,12 +83,23 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
                 organisation.getId());
     }
 
+    /**
+     * Deletes an organisation.
+     *
+     * @param id The id of the organisation to be deleted
+     */
     @Override
     public void deleteOrganisationById(int id) {
         final String DELETE_ORGANISATION = "DELETE FROM VillainOrganisations WHERE id = ?";
         jdbc.update(DELETE_ORGANISATION, id);
     }
 
+    /**
+     * Returns all the organisations the character is associated with.
+     *
+     * @param villain The character
+     * @return The list of organisations
+     */
     @Override
     public List<VillainOrganisation> getOrganisationsByVillain(Villain villain) {
         final String GET_ORGANISATIONS_BY_VILLAIN = "SELECT VillainOrganisations.id as \"id\", VillainOrganisations.name as \"name\", VillainOrganisations.description as \"description\", address, contact\n"
@@ -77,6 +110,12 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
         return jdbc.query(GET_ORGANISATIONS_BY_VILLAIN, new OrganisationMapper(), villain.getId());
     }
 
+    /**
+     * Adds an affiliation between an organisation and a villain.
+     *
+     * @param organisation The organisation
+     * @param villain The villain
+     */
     @Override
     public void addAffiliation(VillainOrganisation organisation, Villain villain) {
 
@@ -86,6 +125,9 @@ public class VillainOrganisationDatabaseDAO implements VillainOrganisationDAO {
                 organisation.getId());
     }
 
+    /**
+     * Class that maps villain organisations.
+     */
     public static final class OrganisationMapper implements RowMapper<VillainOrganisation> {
 
         @Override

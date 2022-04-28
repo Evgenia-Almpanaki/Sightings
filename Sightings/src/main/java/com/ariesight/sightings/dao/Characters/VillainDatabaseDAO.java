@@ -1,10 +1,8 @@
 package com.ariesight.sightings.dao.Characters;
 
 import com.ariesight.sightings.dao.Organisations.VillainOrganisationDAO;
-import com.ariesight.sightings.dto.Characters.Hero;
 import com.ariesight.sightings.dto.Characters.Villain;
 import com.ariesight.sightings.dto.Location;
-import com.ariesight.sightings.dto.Organisations.HeroOrganisation;
 import com.ariesight.sightings.dto.Organisations.Organisation;
 import com.ariesight.sightings.dto.Organisations.VillainOrganisation;
 import java.sql.ResultSet;
@@ -27,6 +25,12 @@ public class VillainDatabaseDAO implements VillainDAO {
     @Autowired
     VillainOrganisationDAO organisationDAO;
 
+    /**
+     * Returns the villain with the given id.
+     *
+     * @param id The id of the villain
+     * @return The villain
+     */
     @Override
     public Villain getVillainById(int id) {
         try {
@@ -44,6 +48,11 @@ public class VillainDatabaseDAO implements VillainDAO {
         }
     }
 
+    /**
+     * Returns all the villains.
+     *
+     * @return A list of villains
+     */
     @Override
     public List<Villain> getAllVillains() {
         final String GET_ALL_VILLAINS = "SELECT * FROM Villains order by Villains.name";
@@ -52,6 +61,11 @@ public class VillainDatabaseDAO implements VillainDAO {
         return villains;
     }
 
+    /**
+     * Adds the organisation associations to the villains list.
+     *
+     * @param villains A list of villains to be updated
+     */
     private void associateOrganisationsWithVillains(List<Villain> villains) {
         for (Villain villain : villains) {
             List<Organisation> organisations = new ArrayList<>();
@@ -62,6 +76,12 @@ public class VillainDatabaseDAO implements VillainDAO {
         }
     }
 
+    /**
+     * Adds a villain.
+     *
+     * @param villain The villain to be added
+     * @return The Villain object
+     */
     @Override
     @Transactional
     public Villain addVillain(Villain villain) {
@@ -78,6 +98,11 @@ public class VillainDatabaseDAO implements VillainDAO {
         return villain;
     }
 
+    /**
+     * Insert the villain-organisations associations in the database.
+     *
+     * @param villain The villain
+     */
     private void insertAffiliations(Villain villain) {
 
         final String INSERT_AFFILIATION = "INSERT INTO VillainAffiliations(villainID, villainOrganisationID) VALUES(?,?)";
@@ -88,6 +113,11 @@ public class VillainDatabaseDAO implements VillainDAO {
 
     }
 
+    /**
+     * Updates a villain.
+     *
+     * @param villain The villain to be updated
+     */
     @Override
     public void updateVillain(Villain villain) {
 
@@ -108,12 +138,23 @@ public class VillainDatabaseDAO implements VillainDAO {
                 villain.getId());
     }
 
+    /**
+     * Deletes a villain.
+     *
+     * @param id The id of the villain to be deleted
+     */
     @Override
     public void deleteVillainById(int id) {
         final String DELETE_VILLAIN = "DELETE FROM Villains WHERE id = ?";
         jdbc.update(DELETE_VILLAIN, id);
     }
 
+    /**
+     * Returns the villain with the given name.
+     *
+     * @param villainName The name of the villain
+     * @return A Villain
+     */
     @Override
     public Villain getVillainByName(String villainName) {
         try {
@@ -124,6 +165,12 @@ public class VillainDatabaseDAO implements VillainDAO {
         }
     }
 
+    /**
+     * Returns all the villains seen in a location.
+     *
+     * @param location The location
+     * @return A list of villains.
+     */
     @Override
     public List<Villain> getVillainsByLocation(Location location) {
         final String GET_ALL_VILLAINS_BY_LOCATION = "SELECT Villains.id as \"id\", Villains.name as \"name\", Villains.description as \"description\", superpower \n"
@@ -134,6 +181,12 @@ public class VillainDatabaseDAO implements VillainDAO {
         return jdbc.query(GET_ALL_VILLAINS_BY_LOCATION, new VillainMapper(), location.getId());
     }
 
+    /**
+     * Returns all the villains associated with an organisation.
+     *
+     * @param organisation The organisation
+     * @return A list of villains.
+     */
     @Override
     public List<Villain> getVillainsByOrganisation(VillainOrganisation organisation) {
         final String GET_ALL_VILLAINS_BY_ORGANISATION = "SELECT Villains.id as \"id\", Villains.name as \"name\", Villains.description as \"description\", superpower \n"
@@ -145,6 +198,9 @@ public class VillainDatabaseDAO implements VillainDAO {
         return jdbc.query(GET_ALL_VILLAINS_BY_ORGANISATION, new VillainMapper(), organisation.getId());
     }
 
+    /**
+     * Class to map Villain objects.
+     */
     public static final class VillainMapper implements RowMapper<Villain> {
 
         @Override

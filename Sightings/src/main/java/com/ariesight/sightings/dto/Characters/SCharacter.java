@@ -17,7 +17,6 @@ public class SCharacter {
     @NotBlank(message = "Superpower must not be empty.")
     @Size(max = 50, message = "Superpower must be less than 50 characters.")
     protected String superpower;
-
     protected List<Organisation> organisations;
 
     public List<Organisation> getOrganisations() {
@@ -26,12 +25,6 @@ public class SCharacter {
 
     public void setOrganisations(List<Organisation> organisations) {
         this.organisations = organisations;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
     }
 
     public void setId(int id) {
@@ -88,6 +81,12 @@ public class SCharacter {
             return false;
         }
         return Objects.equals(this.superpower, other.superpower);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
     }
 
 }

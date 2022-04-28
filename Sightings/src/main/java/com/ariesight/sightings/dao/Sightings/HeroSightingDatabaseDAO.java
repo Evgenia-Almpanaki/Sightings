@@ -26,6 +26,12 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
     @Autowired
     LocationDAO locationDAO;
 
+    /**
+     * Returns the sighting with the given id.
+     *
+     * @param id The id of the sighting
+     * @return The sighting
+     */
     @Override
     public HeroSighting getSightingById(int id) {
         try {
@@ -39,6 +45,11 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
         }
     }
 
+    /**
+     * Returns all the hero sightings.
+     *
+     * @return A list of sightings.
+     */
     @Override
     public List<HeroSighting> getAllSightings() {
         final String GET_ALL_SIGHTINGS = "SELECT SuperheroSightings.id, characterID, locationID, date, Superheroes.name , Locations.name FROM SuperheroSightings "
@@ -48,6 +59,12 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
         return jdbc.query(GET_ALL_SIGHTINGS, new SightingMapper());
     }
 
+    /**
+     * Adds a new sighting.
+     *
+     * @param sighting The sighting to be added
+     * @return The sighting with the updated id.
+     */
     @Override
     public HeroSighting addSighting(HeroSighting sighting) {
         final String INSERT_SIGHTING = "INSERT INTO SuperheroSightings(characterID, locationID, date) VALUES(?,?,?)";
@@ -64,6 +81,11 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
         return sighting;
     }
 
+    /**
+     * Updates a sighting.
+     *
+     * @param sighting The sighting to be updated
+     */
     @Override
     public void updateSighting(HeroSighting sighting) {
         final String UPDATE_LOCATION = "UPDATE SuperheroSightings SET characterID = ?, locationID = ?, date = ? WHERE id = ?";
@@ -76,6 +98,11 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
                 sighting.getId());
     }
 
+    /**
+     * Deletes the sighting with the given id.
+     *
+     * @param id The id of the sighting to be deleted
+     */
     @Override
     public void deleteSightingById(int id) {
         final String DELETE_SIGHTING = "DELETE FROM SuperheroSightings WHERE id = ?";
@@ -85,14 +112,17 @@ public class HeroSightingDatabaseDAO implements HeroSightingDAO {
 
     @Override
     public List<HeroSighting> getHeroSightingsByDate(String date) {
-        final String GET_SIGHTINGS_BY_DATE = "SELECT * \n" +
-                                            "FROM SuperheroSightings\n" +
-                                            "INNER JOIN Superheroes ON Superheroes.id = SuperheroSightings.characterID\n" +
-                                            "INNER JOIN Locations ON Locations.id = SuperheroSightings.locationID\n" +
-                                            "WHERE date = ?";
+        final String GET_SIGHTINGS_BY_DATE = "SELECT * \n"
+                + "FROM SuperheroSightings\n"
+                + "INNER JOIN Superheroes ON Superheroes.id = SuperheroSightings.characterID\n"
+                + "INNER JOIN Locations ON Locations.id = SuperheroSightings.locationID\n"
+                + "WHERE date = ?";
         return jdbc.query(GET_SIGHTINGS_BY_DATE, new SightingMapper(), date);
     }
 
+    /**
+     * Class that maps HeroSighting objects
+     */
     public static final class SightingMapper implements RowMapper<HeroSighting> {
 
         @Override

@@ -31,6 +31,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to add a hero organisation.
+     *
      * @param request
      * @return The page to be redirected to
      */
@@ -59,6 +60,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to display hero organisations.
+     *
      * @param model
      * @return The page to be redirected to
      */
@@ -73,6 +75,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to delete a hero organisation.
+     *
      * @param request
      * @return The page to be redirected to
      */
@@ -86,6 +89,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to edit a hero organisation.
+     *
      * @param request
      * @param model
      * @return The page to be redirected to
@@ -101,6 +105,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to perform organisation editing.
+     *
      * @param request
      * @return The page to be redirected to
      */
@@ -121,6 +126,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to add a villain organisation.
+     *
      * @param request
      * @return The page to be redirected to
      */
@@ -148,6 +154,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to display villain organisations.
+     *
      * @param model
      * @return The page to be redirected to
      */
@@ -162,6 +169,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to delete a villain organisation.
+     *
      * @param request
      * @return The page to be redirected to
      */
@@ -175,6 +183,7 @@ public class OrganisationController {
 
     /**
      * Endpoint to edit a villain organisation.
+     *
      * @param request
      * @param model
      * @return The page to be redirected to
@@ -189,9 +198,10 @@ public class OrganisationController {
     }
 
     /**
-     * 
+     * Endpoint to permorm villain organisation editing
+     *
      * @param request
-     * @return 
+     * @return
      */
     @PostMapping("editVillainOrganisation")
     public String performEditVillainOrganisation(HttpServletRequest request) {

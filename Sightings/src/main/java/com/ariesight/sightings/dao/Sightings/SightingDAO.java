@@ -5,6 +5,11 @@ import java.util.List;
 
 public interface SightingDAO {
 
-    List<Sighting> getAllSightings();
+    /**
+     * Returns the most recent sightings.
+     *
+     * @return A list of sightings
+     */
+    List<Sighting> getRecentSightings();
 
 }

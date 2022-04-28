@@ -106,5 +106,4 @@ public class Location {
         return Objects.equals(this.longitude, other.longitude);
     }
 
-
 }

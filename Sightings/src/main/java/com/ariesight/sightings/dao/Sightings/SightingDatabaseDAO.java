@@ -23,8 +23,13 @@ public class SightingDatabaseDAO implements SightingDAO {
     @Autowired
     LocationDAO locationDAO;
 
+    /**
+     * Returns the most recent sightings.
+     *
+     * @return A list of sightings
+     */
     @Override
-    public List<Sighting> getAllSightings() {
+    public List<Sighting> getRecentSightings() {
         final String GET_ALL_SIGHTINGS = "SELECT Superheroes.name, Locations.name as \"location\", date FROM SuperheroSightings\n"
                 + "join Locations on Locations.id = SuperheroSightings.locationID\n"
                 + "join Superheroes on Superheroes.id = SuperheroSightings.characterID\n"
@@ -37,6 +42,9 @@ public class SightingDatabaseDAO implements SightingDAO {
         return jdbc.query(GET_ALL_SIGHTINGS, new SightingMapper());
     }
 
+    /**
+     * Class that maps Sighting objects
+     */
     public static final class SightingMapper implements RowMapper<Sighting> {
 
         @Override
