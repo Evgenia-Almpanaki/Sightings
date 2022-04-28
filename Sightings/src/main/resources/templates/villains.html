@@ -104,6 +104,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Superpower</th>
+                        <th>Details</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -113,6 +114,7 @@
                         <td th:text="${character.name}">Character Name</td>
                         <td th:text="${character.description}">Character Description</td>
                         <td th:text="${character.superpower}">Character Superpower</td>
+                        <td><a href="#" th:href="@{/detail/villain(id=${character.id})}">Details</a></td>
                         <td><a href="#" th:href="@{/editVillain(id=${character.id})}">Edit</a></td>
                         <td><a href="#" th:href="@{/deleteCharacter/villain(id=${character.id})}">Delete</a></td>
                     </tr>

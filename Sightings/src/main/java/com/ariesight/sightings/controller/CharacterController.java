@@ -257,4 +257,31 @@ public class CharacterController {
         return "redirect:/villains";
     }
 
+    /**
+     * Endpoint for hero details.
+     *
+     * @param id The id of the hero
+     * @param model
+     * @return The page to be redirected to
+     */
+    @GetMapping("detail/hero")
+    public String heroDetail(Integer id, Model model) {
+        Hero character = heroDAO.getHeroById(id);
+        model.addAttribute("character", character);
+        return "heroDetail";
+    }
+
+    /**
+     * Endpoint for villain details.
+     *
+     * @param id The id of the villain
+     * @param model
+     * @return The page to be redirected to
+     */
+    @GetMapping("detail/villain")
+    public String villainDetail(Integer id, Model model) {
+        Villain character = villainDAO.getVillainById(id);
+        model.addAttribute("character", character);
+        return "heroDetail";
+    }
 }
